@@ -1,0 +1,1676 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FenixModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AppLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Message" Type="nvarchar(max)" />
+          <Property Name="XmlMessage" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifyUserId" Type="int" Nullable="false" />
+          <Property Name="Source" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="cdlItems">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="GroupGoods" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DescriptionCz" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DescriptionEng" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="MeasuresId" Type="int" Nullable="false" />
+          <Property Name="ItemTypesId" Type="int" Nullable="false" />
+          <Property Name="PackagingId" Type="int" />
+          <Property Name="GroupsId" Type="int" />
+          <Property Name="ItemType" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="PC" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Packaging" Type="nchar" MaxLength="10" />
+          <Property Name="IsSent" Type="bit" Nullable="false" />
+          <Property Name="SentDate" Type="datetime" />
+          <Property Name="ItemTypeDesc1" Type="nvarchar" MaxLength="35" Nullable="false" />
+          <Property Name="ItemTypeDesc2" Type="nvarchar" MaxLength="35" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifyUserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="cdlItemTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DescriptionCz" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DescriptionEng" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsSent" Type="int" Nullable="false" />
+          <Property Name="SentDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifyUserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="cdlKits">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="5" />
+          <Property Name="DescriptionCz" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DescriptionEng" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MeasuresId" Type="int" Nullable="false" />
+          <Property Name="MeasuresCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="KitQualitiesId" Type="int" />
+          <Property Name="KitQualitiesCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsSent" Type="bit" Nullable="false" />
+          <Property Name="SentDate" Type="datetime" />
+          <Property Name="GroupsId" Type="int" />
+          <Property Name="Packaging" Type="int" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifyUserId" Type="int" Nullable="false" />
+          <Property Name="Multiplayer" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="cdlKitsItems">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cdlKitsId" Type="int" Nullable="false" />
+          <Property Name="ItemVerKit" Type="bit" Nullable="false" />
+          <Property Name="ItemOrKitId" Type="int" Nullable="false" />
+          <Property Name="ItemGroupGoods" Type="nvarchar" MaxLength="3" />
+          <Property Name="ItemCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="ItemOrKitQuantity" Type="numeric" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="PackageType" Type="nchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifyUserId" Type="int" Nullable="false" />
+          <Property Name="IsSent" Type="bit" Nullable="false" />
+          <Property Name="SentDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="cdlMeasures">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DescriptionCz" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="DescriptionEng" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="IsSent" Type="bit" Nullable="false" />
+          <Property Name="SentDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifyUserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="cdlMessageTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="DescriptionCz" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DescriptionEng" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsSent" Type="bit" Nullable="false" />
+          <Property Name="SentDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifyUserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="cdlReturnValues">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="DescriptionCz" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="DescriptionEng" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="IsSent" Type="bit" Nullable="false" />
+          <Property Name="SentDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifyUserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="cdlStatuses">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="DescriptionCz" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DescriptionEng" Type="nvarchar" MaxLength="100" />
+          <Property Name="IsSent" Type="bit" Nullable="false" />
+          <Property Name="SentDate" Type="datetime" />
+          <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CommunicationMessagesKittingsApprovalKitsSent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ApprovalID" Type="int" Nullable="false" />
+          <Property Name="KitID" Type="int" Nullable="false" />
+          <Property Name="KitDescription" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="KitQuantity" Type="numeric" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="KitUnitOfMeasureID" Type="int" Nullable="false" />
+          <Property Name="KitUnitOfMeasure" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="KitQualityId" Type="int" Nullable="false" />
+          <Property Name="KitQuality" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifyUserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CommunicationMessagesKittingsApprovalKitsSerNumSent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ApprovalKitsID" Type="int" Nullable="false" />
+          <Property Name="SN1" Type="nvarchar" MaxLength="20" />
+          <Property Name="SN2" Type="nvarchar" MaxLength="20" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifyUserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CommunicationMessagesKittingsApprovalSent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MessageId" Type="int" Nullable="false" />
+          <Property Name="MessageTypeID" Type="int" Nullable="false" />
+          <Property Name="MessageDescription" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="MessageDateOfShipment" Type="datetime" />
+          <Property Name="RequiredReleaseDate" Type="datetime" />
+          <Property Name="MessageStatusID" Type="int" Nullable="false" />
+          <Property Name="Released" Type="bit" Nullable="false" />
+          <Property Name="HeliosOrderID" Type="int" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifyUserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CommunicationMessagesKittingsSent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MessageId" Type="int" Nullable="false" />
+          <Property Name="MessageType" Type="int" Nullable="false" />
+          <Property Name="MessageDescription" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="MessageDateOfShipment" Type="datetime" />
+          <Property Name="MessageStatusId" Type="int" Nullable="false" />
+          <Property Name="HeliosOrderId" Type="int" Nullable="false" />
+          <Property Name="KitDateOfDelivery" Type="datetime" Nullable="false" />
+          <Property Name="IsManually" Type="bit" />
+          <Property Name="Notice" Type="nvarchar(max)" />
+          <Property Name="StockId" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifyUserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CommunicationMessagesKittingsSentItems">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CMSOId" Type="int" Nullable="false" />
+          <Property Name="HeliosOrderID" Type="int" Nullable="false" />
+          <Property Name="HeliosOrderRecordId" Type="int" Nullable="false" />
+          <Property Name="KitId" Type="int" Nullable="false" />
+          <Property Name="KitDescription" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="KitQuantity" Type="numeric" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="KitQuantityDelivered" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="MeasuresID" Type="int" Nullable="false" />
+          <Property Name="KitUnitOfMeasure" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="KitQualityId" Type="int" Nullable="false" />
+          <Property Name="KitQualityCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="CardStockItemsId" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifyUserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CommunicationMessagesReceptionConfirmation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MessageId" Type="int" Nullable="false" />
+          <Property Name="MessageTypeId" Type="int" Nullable="false" />
+          <Property Name="MessageDescription" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="MessageDateOfReceipt" Type="datetime" />
+          <Property Name="CommunicationMessagesSentId" Type="int" Nullable="false" />
+          <Property Name="ItemSupplierId" Type="int" Nullable="false" />
+          <Property Name="ItemSupplierDescription" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Reconciliation" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifyUserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CommunicationMessagesReceptionSent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MessageId" Type="int" Nullable="false" />
+          <Property Name="MessageType" Type="int" Nullable="false" />
+          <Property Name="MessageDescription" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="MessageDateOfShipment" Type="datetime" />
+          <Property Name="MessageStatusId" Type="int" Nullable="false" />
+          <Property Name="HeliosOrderId" Type="int" Nullable="false" />
+          <Property Name="ItemSupplierId" Type="int" Nullable="false" />
+          <Property Name="ItemSupplierDescription" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="ItemDateOfDelivery" Type="datetime" Nullable="false" />
+          <Property Name="IsManually" Type="bit" Nullable="false" />
+          <Property Name="StockId" Type="int" />
+          <Property Name="Notice" Type="nvarchar(max)" />
+          <Property Name="RadaDokladu" Type="char" MaxLength="3" />
+          <Property Name="PoradoveCislo" Type="int" />
+          <Property Name="RadaPlusPorCislo" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifyUserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CommunicationMessagesReceptionSentItems">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CMSOId" Type="int" Nullable="false" />
+          <Property Name="HeliosOrderId" Type="int" />
+          <Property Name="HeliosOrderRecordId" Type="int" />
+          <Property Name="ItemID" Type="int" Nullable="false" />
+          <Property Name="GroupGoods" Type="nvarchar" MaxLength="3" Nullable="false" />
+          <Property Name="ItemCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ItemDescription" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="ItemQuantity" Type="numeric" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="ItemQuantityDelivered" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="MeasuresID" Type="int" Nullable="false" />
+          <Property Name="ItemUnitOfMeasure" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ItemQualityId" Type="int" Nullable="false" />
+          <Property Name="ItemQualityCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SourceId" Type="int" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifyUserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CommunicationMessagesShipmentOrdersConfirmation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MessageId" Type="int" Nullable="false" />
+          <Property Name="MessageTypeId" Type="int" Nullable="false" />
+          <Property Name="MessageDescription" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="MessageDateOfReceipt" Type="datetime" />
+          <Property Name="ShipmentOrderID" Type="int" Nullable="false" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="ContactID" Type="int" Nullable="false" />
+          <Property Name="Reconciliation" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifyUserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CommunicationMessagesShipmentOrdersConfirmationItems">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CMSOId" Type="int" Nullable="false" />
+          <Property Name="SingleOrMaster" Type="int" Nullable="false" />
+          <Property Name="HeliosOrderRecordID" Type="int" />
+          <Property Name="ItemVerKit" Type="int" Nullable="false" />
+          <Property Name="ItemOrKitID" Type="int" Nullable="false" />
+          <Property Name="ItemOrKitDescription" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ItemOrKitQuantity" Type="numeric" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="ItemOrKitUnitOfMeasureId" Type="int" Nullable="false" />
+          <Property Name="ItemOrKitUnitOfMeasure" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ItemOrKitQualityId" Type="int" Nullable="false" />
+          <Property Name="ItemOrKitQualityCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IncotermsId" Type="int" />
+          <Property Name="IncotermDescription" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="RealDateOfDelivery" Type="datetime" />
+          <Property Name="RealItemOrKitQuantity" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="RealItemOrKitQualityID" Type="int" />
+          <Property Name="RealItemOrKitQuality" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="int" />
+          <Property Name="KitSNs" Type="varchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifyUserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CommunicationMessagesShipmentOrdersSent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MessageId" Type="int" Nullable="false" />
+          <Property Name="MessageTypeId" Type="int" Nullable="false" />
+          <Property Name="MessageDescription" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="MessageDateOfShipment" Type="datetime" />
+          <Property Name="RequiredDateOfShipment" Type="datetime" Nullable="false" />
+          <Property Name="MessageStatusId" Type="int" Nullable="false" />
+          <Property Name="HeliosOrderId" Type="int" Nullable="false" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="CustomerName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CustomerAddress1" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="CustomerAddress2" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CustomerAddress3" Type="nvarchar" MaxLength="50" />
+          <Property Name="CustomerCity" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="CustomerZipCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="CustomerCountryISO" Type="char" MaxLength="3" />
+          <Property Name="ContactID" Type="int" Nullable="false" />
+          <Property Name="ContactTitle" Type="char" MaxLength="1" Nullable="false" />
+          <Property Name="ContactFirstName" Type="nvarchar" MaxLength="35" />
+          <Property Name="ContactLastName" Type="nvarchar" MaxLength="35" Nullable="false" />
+          <Property Name="ContactPhoneNumber1" Type="nvarchar" MaxLength="15" Nullable="false" />
+          <Property Name="ContactPhoneNumber2" Type="nvarchar" MaxLength="15" />
+          <Property Name="ContactFaxNumber" Type="nvarchar" MaxLength="15" />
+          <Property Name="ContactEmail" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="IsManually" Type="bit" />
+          <Property Name="StockId" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifyUserId" Type="int" Nullable="false" />
+          <Property Name="IdWf" Type="int" />
+          <Property Name="Remark" Type="nvarchar" MaxLength="4000" />
+        </EntityType>
+        <EntityType Name="CommunicationMessagesShipmentOrdersSentItems">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CMSOId" Type="int" Nullable="false" />
+          <Property Name="SingleOrMaster" Type="int" Nullable="false" />
+          <Property Name="ItemVerKit" Type="int" Nullable="false" />
+          <Property Name="ItemOrKitID" Type="int" Nullable="false" />
+          <Property Name="ItemOrKitDescription" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ItemOrKitQuantity" Type="numeric" Precision="18" Scale="3" Nullable="false" />
+          <Property Name="ItemOrKitQuantityReal" Type="numeric" Precision="18" Scale="3" />
+          <Property Name="ItemOrKitUnitOfMeasureId" Type="int" Nullable="false" />
+          <Property Name="ItemOrKitUnitOfMeasure" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ItemOrKitQualityId" Type="int" Nullable="false" />
+          <Property Name="ItemOrKitQualityCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="ItemType" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IncotermsId" Type="int" Nullable="false" />
+          <Property Name="Incoterms" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="PackageValue" Type="int" />
+          <Property Name="ShipmentOrderSource" Type="int" Nullable="false" />
+          <Property Name="VydejkyId" Type="int" />
+          <Property Name="CardStockItemsId" Type="int" />
+          <Property Name="HeliosOrderRecordId" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="ModifyDate" Type="datetime" Nullable="false" />
+          <Property Name="ModifyUserId" Type="int" Nullable="false" />
+          <Property Name="IdRowReleaseNote" Type="int" />
+        </EntityType>
+        <Function Name="prAppLogWriteNew" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Type" Type="nvarchar" Mode="In" />
+          <Parameter Name="Message" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="XmlDeclaration" Type="nvarchar" Mode="In" />
+          <Parameter Name="XmlMessage" Type="xml" Mode="In" />
+          <Parameter Name="UserId" Type="int" Mode="In" />
+          <Parameter Name="Source" Type="nvarchar" Mode="In" />
+          <Parameter Name="ReturnValue" Type="int" Mode="InOut" />
+          <Parameter Name="ReturnMessage" Type="nvarchar" Mode="InOut" />
+        </Function>
+        <Function Name="prCdlItemsSetSent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ItemID" Type="int" Mode="In" />
+          <Parameter Name="ReturnValue" Type="int" Mode="InOut" />
+          <Parameter Name="ReturnMessage" Type="nvarchar" Mode="InOut" />
+        </Function>
+        <Function Name="prCdlKitsSetSent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ItemID" Type="int" Mode="In" />
+          <Parameter Name="ReturnValue" Type="int" Mode="InOut" />
+          <Parameter Name="ReturnMessage" Type="nvarchar" Mode="InOut" />
+        </Function>
+        <Function Name="prCMDeleteMessage" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="par1" Type="xml" Mode="In" />
+          <Parameter Name="ReturnValue" Type="int" Mode="InOut" />
+          <Parameter Name="ReturnMessage" Type="nvarchar" Mode="InOut" />
+        </Function>
+        <Function Name="prCMRCins" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="par1" Type="xml" Mode="In" />
+          <Parameter Name="ReturnValue" Type="int" Mode="InOut" />
+          <Parameter Name="ReturnMessage" Type="nvarchar" Mode="InOut" />
+        </Function>
+        <Function Name="prCMRCKins" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="par1" Type="xml" Mode="In" />
+          <Parameter Name="ReturnValue" Type="int" Mode="InOut" />
+          <Parameter Name="ReturnMessage" Type="nvarchar" Mode="InOut" />
+        </Function>
+        <Function Name="prCMReturn" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="par1" Type="xml" Mode="In" />
+          <Parameter Name="ReturnValue" Type="int" Mode="InOut" />
+          <Parameter Name="ReturnMessage" Type="nvarchar" Mode="InOut" />
+        </Function>
+        <Function Name="prCMReturnedItem" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="par1" Type="xml" Mode="In" />
+          <Parameter Name="ReturnValue" Type="int" Mode="InOut" />
+          <Parameter Name="ReturnMessage" Type="nvarchar" Mode="InOut" />
+        </Function>
+        <Function Name="prCMReturnedShipment" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="par1" Type="xml" Mode="In" />
+          <Parameter Name="ReturnValue" Type="int" Mode="InOut" />
+          <Parameter Name="ReturnMessage" Type="nvarchar" Mode="InOut" />
+        </Function>
+        <Function Name="prCrmOrderC1ins" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="par1" Type="xml" Mode="In" />
+          <Parameter Name="ReturnValue" Type="int" Mode="InOut" />
+          <Parameter Name="ReturnMessage" Type="nvarchar" Mode="InOut" />
+        </Function>
+        <Function Name="prCrmOrderC2ins" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="par1" Type="xml" Mode="In" />
+          <Parameter Name="ReturnValue" Type="int" Mode="InOut" />
+          <Parameter Name="ReturnMessage" Type="nvarchar" Mode="InOut" />
+        </Function>
+        <Function Name="prGetAutomatStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ReturnValue" Type="int" Mode="InOut" />
+          <Parameter Name="ReturnMessage" Type="nvarchar" Mode="InOut" />
+        </Function>
+        <Function Name="prGetIntValueFromCounter" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CounterName" Type="varchar" Mode="In" />
+          <Parameter Name="NewValue" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="prKiSHCins" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="par1" Type="xml" Mode="In" />
+          <Parameter Name="ReturnValue" Type="int" Mode="InOut" />
+          <Parameter Name="ReturnMessage" Type="nvarchar" Mode="InOut" />
+        </Function>
+        <Function Name="prKittingsApprovalSetSent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ReceptionOrderID" Type="int" Mode="In" />
+          <Parameter Name="MessageStatusID" Type="int" Mode="In" />
+          <Parameter Name="ReturnValue" Type="int" Mode="InOut" />
+          <Parameter Name="ReturnMessage" Type="nvarchar" Mode="InOut" />
+        </Function>
+        <Function Name="prKittingsOrderSetSent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ReceptionOrderID" Type="int" Mode="In" />
+          <Parameter Name="MessageStatusID" Type="int" Mode="In" />
+          <Parameter Name="ReturnValue" Type="int" Mode="InOut" />
+          <Parameter Name="ReturnMessage" Type="nvarchar" Mode="InOut" />
+        </Function>
+        <Function Name="prReceptionOrderSetSent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ReceptionOrderID" Type="int" Mode="In" />
+          <Parameter Name="MessageStatusID" Type="int" Mode="In" />
+          <Parameter Name="ReturnValue" Type="int" Mode="InOut" />
+          <Parameter Name="ReturnMessage" Type="nvarchar" Mode="InOut" />
+        </Function>
+        <Function Name="prRORF1ins" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="par1" Type="xml" Mode="In" />
+          <Parameter Name="ReturnValue" Type="int" Mode="InOut" />
+          <Parameter Name="ReturnMessage" Type="nvarchar" Mode="InOut" />
+        </Function>
+        <Function Name="prShipmentOrderSetSent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ReceptionOrderID" Type="int" Mode="In" />
+          <Parameter Name="MessageStatusID" Type="int" Mode="In" />
+          <Parameter Name="ReturnValue" Type="int" Mode="InOut" />
+          <Parameter Name="ReturnMessage" Type="nvarchar" Mode="InOut" />
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="FenixModelStoreContainer">
+          <EntitySet Name="AppLog" EntityType="Self.AppLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cdlItems" EntityType="Self.cdlItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cdlItemTypes" EntityType="Self.cdlItemTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cdlKits" EntityType="Self.cdlKits" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cdlKitsItems" EntityType="Self.cdlKitsItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cdlMeasures" EntityType="Self.cdlMeasures" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cdlMessageTypes" EntityType="Self.cdlMessageTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cdlReturnValues" EntityType="Self.cdlReturnValues" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="cdlStatuses" EntityType="Self.cdlStatuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CommunicationMessagesKittingsApprovalKitsSent" EntityType="Self.CommunicationMessagesKittingsApprovalKitsSent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CommunicationMessagesKittingsApprovalKitsSerNumSent" EntityType="Self.CommunicationMessagesKittingsApprovalKitsSerNumSent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CommunicationMessagesKittingsApprovalSent" EntityType="Self.CommunicationMessagesKittingsApprovalSent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CommunicationMessagesKittingsSent" EntityType="Self.CommunicationMessagesKittingsSent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CommunicationMessagesKittingsSentItems" EntityType="Self.CommunicationMessagesKittingsSentItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CommunicationMessagesReceptionConfirmation" EntityType="Self.CommunicationMessagesReceptionConfirmation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CommunicationMessagesReceptionSent" EntityType="Self.CommunicationMessagesReceptionSent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CommunicationMessagesReceptionSentItems" EntityType="Self.CommunicationMessagesReceptionSentItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CommunicationMessagesShipmentOrdersConfirmation" EntityType="Self.CommunicationMessagesShipmentOrdersConfirmation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CommunicationMessagesShipmentOrdersConfirmationItems" EntityType="Self.CommunicationMessagesShipmentOrdersConfirmationItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CommunicationMessagesShipmentOrdersSent" EntityType="Self.CommunicationMessagesShipmentOrdersSent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CommunicationMessagesShipmentOrdersSentItems" EntityType="Self.CommunicationMessagesShipmentOrdersSentItems" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FenixModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AppLog">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="XmlMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyUserId" Type="Int32" Nullable="false" />
+          <Property Name="Source" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="FenixEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AppLog" EntityType="Self.AppLog" />
+          <FunctionImport Name="prAppLogWrite">
+            <Parameter Name="Type" Mode="In" Type="String" />
+            <Parameter Name="Message" Mode="In" Type="String" />
+            <Parameter Name="XmlMessage" Mode="In" Type="String" />
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+            <Parameter Name="Source" Mode="In" Type="String" />
+            <Parameter Name="ReturnValue" Mode="InOut" Type="Int32" />
+            <Parameter Name="ReturnMessage" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="cdlKits" EntityType="FenixModel.cdlKits" />
+          <EntitySet Name="cdlKitsItems" EntityType="FenixModel.cdlKitsItems" />
+          <EntitySet Name="cdlMessageTypes" EntityType="FenixModel.cdlMessageTypes" />
+          <EntitySet Name="cdlReturnValues" EntityType="FenixModel.cdlReturnValues" />
+          <EntitySet Name="cdlStatuses" EntityType="FenixModel.cdlStatuses" />
+          <EntitySet Name="CommunicationMessagesReceptionConfirmation" EntityType="FenixModel.CommunicationMessagesReceptionConfirmation" />
+          <AssociationSet Name="FK_cdlKitsItems_cdlKits" Association="FenixModel.FK_cdlKitsItems_cdlKits">
+            <End Role="cdlKits" EntitySet="cdlKits" />
+            <End Role="cdlKitsItems" EntitySet="cdlKitsItems" />
+          </AssociationSet>
+          <FunctionImport Name="prCMRCins">
+            <Parameter Name="par1" Mode="In" Type="String" />
+            <Parameter Name="ReturnValue" Mode="InOut" Type="Int32" />
+            <Parameter Name="ReturnMessage" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prCMRCKins">
+            <Parameter Name="par1" Mode="In" Type="String" />
+            <Parameter Name="ReturnValue" Mode="InOut" Type="Int32" />
+            <Parameter Name="ReturnMessage" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prAppLogWriteNew">
+            <Parameter Name="Type" Mode="In" Type="String" />
+            <Parameter Name="Message" Mode="In" Type="String" />
+            <Parameter Name="XmlDeclaration" Mode="In" Type="String" />
+            <Parameter Name="XmlMessage" Mode="In" Type="String" />
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+            <Parameter Name="Source" Mode="In" Type="String" />
+            <Parameter Name="ReturnValue" Mode="InOut" Type="Int32" />
+            <Parameter Name="ReturnMessage" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="CommunicationMessagesShipmentOrdersConfirmation" EntityType="FenixModel.CommunicationMessagesShipmentOrdersConfirmation" />
+          <EntitySet Name="CommunicationMessagesShipmentOrdersConfirmationItems" EntityType="FenixModel.CommunicationMessagesShipmentOrdersConfirmationItems" />
+          <FunctionImport Name="prKiSHCins">
+            <Parameter Name="par1" Mode="In" Type="String" />
+            <Parameter Name="ReturnValue" Mode="InOut" Type="Int32" />
+            <Parameter Name="ReturnMessage" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prCMReturn">
+            <Parameter Name="par1" Mode="In" Type="String" />
+            <Parameter Name="ReturnValue" Mode="InOut" Type="Int32" />
+            <Parameter Name="ReturnMessage" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="cdlItemTypes" EntityType="FenixModel.cdlItemTypes" />
+          <FunctionImport Name="prGetIntValueFromCounter">
+            <Parameter Name="CounterName" Mode="In" Type="String" />
+            <Parameter Name="NewValue" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="prCdlItemsSetSent">
+            <Parameter Name="ItemID" Mode="In" Type="Int32" />
+            <Parameter Name="ReturnValue" Mode="InOut" Type="Int32" />
+            <Parameter Name="ReturnMessage" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prCdlKitsSetSent">
+            <Parameter Name="ItemID" Mode="In" Type="Int32" />
+            <Parameter Name="ReturnValue" Mode="InOut" Type="Int32" />
+            <Parameter Name="ReturnMessage" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="CommunicationMessagesKittingsSent" EntityType="FenixModel.CommunicationMessagesKittingsSent" />
+          <EntitySet Name="CommunicationMessagesKittingsSentItems" EntityType="FenixModel.CommunicationMessagesKittingsSentItems" />
+          <EntitySet Name="CommunicationMessagesReceptionSent" EntityType="FenixModel.CommunicationMessagesReceptionSent" />
+          <EntitySet Name="CommunicationMessagesReceptionSentItems" EntityType="FenixModel.CommunicationMessagesReceptionSentItems" />
+          <AssociationSet Name="FK_CommunicationMessagesReceptionSent_cdlMessageTypes" Association="FenixModel.FK_CommunicationMessagesReceptionSent_cdlMessageTypes">
+            <End Role="cdlMessageTypes" EntitySet="cdlMessageTypes" />
+            <End Role="CommunicationMessagesReceptionSent" EntitySet="CommunicationMessagesReceptionSent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CommunicationMessagesReceptionSent_cdlStatuses" Association="FenixModel.FK_CommunicationMessagesReceptionSent_cdlStatuses">
+            <End Role="cdlStatuses" EntitySet="cdlStatuses" />
+            <End Role="CommunicationMessagesReceptionSent" EntitySet="CommunicationMessagesReceptionSent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CommunicationMessagesReceptionConfirmation_CommunicationMessagesReceptionSent" Association="FenixModel.FK_CommunicationMessagesReceptionConfirmation_CommunicationMessagesReceptionSent">
+            <End Role="CommunicationMessagesReceptionSent" EntitySet="CommunicationMessagesReceptionSent" />
+            <End Role="CommunicationMessagesReceptionConfirmation" EntitySet="CommunicationMessagesReceptionConfirmation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CommunicationMessagesReceptionSentItems_CommunicationMessagesReceptionSent" Association="FenixModel.FK_CommunicationMessagesReceptionSentItems_CommunicationMessagesReceptionSent">
+            <End Role="CommunicationMessagesReceptionSent" EntitySet="CommunicationMessagesReceptionSent" />
+            <End Role="CommunicationMessagesReceptionSentItems" EntitySet="CommunicationMessagesReceptionSentItems" />
+          </AssociationSet>
+          <EntitySet Name="CommunicationMessagesKittingsApprovalKitsSent" EntityType="FenixModel.CommunicationMessagesKittingsApprovalKitsSent" />
+          <EntitySet Name="CommunicationMessagesKittingsApprovalKitsSerNumSent" EntityType="FenixModel.CommunicationMessagesKittingsApprovalKitsSerNumSent" />
+          <EntitySet Name="CommunicationMessagesKittingsApprovalSent" EntityType="FenixModel.CommunicationMessagesKittingsApprovalSent" />
+          <EntitySet Name="CommunicationMessagesShipmentOrdersSent" EntityType="FenixModel.CommunicationMessagesShipmentOrdersSent" />
+          <EntitySet Name="CommunicationMessagesShipmentOrdersSentItems" EntityType="FenixModel.CommunicationMessagesShipmentOrdersSentItems" />
+          <FunctionImport Name="prKittingsApprovalSetSent">
+            <Parameter Name="ReceptionOrderID" Mode="In" Type="Int32" />
+            <Parameter Name="MessageStatusID" Mode="In" Type="Int32" />
+            <Parameter Name="ReturnValue" Mode="InOut" Type="Int32" />
+            <Parameter Name="ReturnMessage" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prKittingsOrderSetSent">
+            <Parameter Name="ReceptionOrderID" Mode="In" Type="Int32" />
+            <Parameter Name="MessageStatusID" Mode="In" Type="Int32" />
+            <Parameter Name="ReturnValue" Mode="InOut" Type="Int32" />
+            <Parameter Name="ReturnMessage" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prReceptionOrderSetSent">
+            <Parameter Name="ReceptionOrderID" Mode="In" Type="Int32" />
+            <Parameter Name="MessageStatusID" Mode="In" Type="Int32" />
+            <Parameter Name="ReturnValue" Mode="InOut" Type="Int32" />
+            <Parameter Name="ReturnMessage" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prShipmentOrderSetSent">
+            <Parameter Name="ReceptionOrderID" Mode="In" Type="Int32" />
+            <Parameter Name="MessageStatusID" Mode="In" Type="Int32" />
+            <Parameter Name="ReturnValue" Mode="InOut" Type="Int32" />
+            <Parameter Name="ReturnMessage" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prRORF1ins">
+            <Parameter Name="par1" Mode="In" Type="String" />
+            <Parameter Name="ReturnValue" Mode="InOut" Type="Int32" />
+            <Parameter Name="ReturnMessage" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prGetAutomatStatus">
+            <Parameter Name="ReturnValue" Mode="InOut" Type="Int32" />
+            <Parameter Name="ReturnMessage" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="cdlItems" EntityType="FenixModel.cdlItems" />
+          <EntitySet Name="cdlMeasures" EntityType="FenixModel.cdlMeasures" />
+          <FunctionImport Name="prCMReturnedItem">
+            <Parameter Name="par1" Mode="In" Type="String" />
+            <Parameter Name="ReturnValue" Mode="InOut" Type="Int32" />
+            <Parameter Name="ReturnMessage" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prCMReturnedShipment">
+            <Parameter Name="par1" Mode="In" Type="String" />
+            <Parameter Name="ReturnValue" Mode="InOut" Type="Int32" />
+            <Parameter Name="ReturnMessage" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prCMDeleteMessage">
+            <Parameter Name="par1" Mode="In" Type="String" />
+            <Parameter Name="ReturnValue" Mode="InOut" Type="Int32" />
+            <Parameter Name="ReturnMessage" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prCrmOrderC1ins">
+            <Parameter Name="par1" Mode="In" Type="String" />
+            <Parameter Name="ReturnValue" Mode="InOut" Type="Int32" />
+            <Parameter Name="ReturnMessage" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prCrmOrderC2ins">
+            <Parameter Name="par1" Mode="In" Type="String" />
+            <Parameter Name="ReturnValue" Mode="InOut" Type="Int32" />
+            <Parameter Name="ReturnMessage" Mode="InOut" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="cdlKits">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="DescriptionCz" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DescriptionEng" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MeasuresId" Type="Int32" Nullable="false" />
+          <Property Name="MeasuresCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KitQualitiesId" Type="Int32" />
+          <Property Name="KitQualitiesCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsSent" Type="Boolean" Nullable="false" />
+          <Property Name="SentDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyUserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="cdlKitsItems" Relationship="FenixModel.FK_cdlKitsItems_cdlKits" FromRole="cdlKits" ToRole="cdlKitsItems" />
+          <Property Name="GroupsId" Type="Int32" />
+          <Property Name="Packaging" Type="Int32" />
+          <Property Name="Multiplayer" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="cdlKitsItems">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cdlKitsId" Type="Int32" Nullable="false" />
+          <Property Name="ItemVerKit" Type="Boolean" Nullable="false" />
+          <Property Name="ItemOrKitId" Type="Int32" Nullable="false" />
+          <Property Name="ItemGroupGoods" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="ItemCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ItemOrKitQuantity" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="PackageType" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyUserId" Type="Int32" Nullable="false" />
+          <Property Name="IsSent" Type="Boolean" Nullable="false" />
+          <Property Name="SentDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="cdlKits" Relationship="FenixModel.FK_cdlKitsItems_cdlKits" FromRole="cdlKitsItems" ToRole="cdlKits" />
+        </EntityType>
+        <EntityType Name="cdlMessageTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="DescriptionCz" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DescriptionEng" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsSent" Type="Boolean" Nullable="false" />
+          <Property Name="SentDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyUserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CommunicationMessagesReceptionSent" Relationship="FenixModel.FK_CommunicationMessagesReceptionSent_cdlMessageTypes" FromRole="cdlMessageTypes" ToRole="CommunicationMessagesReceptionSent" />
+        </EntityType>
+        <EntityType Name="cdlReturnValues">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="DescriptionCz" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="DescriptionEng" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="IsSent" Type="Boolean" Nullable="false" />
+          <Property Name="SentDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyUserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="cdlStatuses">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="DescriptionCz" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DescriptionEng" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IsSent" Type="Boolean" Nullable="false" />
+          <Property Name="SentDate" Type="DateTime" Precision="3" />
+          <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CommunicationMessagesReceptionSent" Relationship="FenixModel.FK_CommunicationMessagesReceptionSent_cdlStatuses" FromRole="cdlStatuses" ToRole="CommunicationMessagesReceptionSent" />
+        </EntityType>
+        <EntityType Name="CommunicationMessagesReceptionConfirmation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MessageId" Type="Int32" Nullable="false" />
+          <Property Name="MessageTypeId" Type="Int32" Nullable="false" />
+          <Property Name="MessageDescription" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MessageDateOfReceipt" Type="DateTime" Precision="3" />
+          <Property Name="CommunicationMessagesSentId" Type="Int32" Nullable="false" />
+          <Property Name="ItemSupplierId" Type="Int32" Nullable="false" />
+          <Property Name="ItemSupplierDescription" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Reconciliation" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyUserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CommunicationMessagesReceptionSent" Relationship="FenixModel.FK_CommunicationMessagesReceptionConfirmation_CommunicationMessagesReceptionSent" FromRole="CommunicationMessagesReceptionConfirmation" ToRole="CommunicationMessagesReceptionSent" />
+        </EntityType>
+        <Association Name="FK_cdlKitsItems_cdlKits">
+          <End Type="FenixModel.cdlKits" Role="cdlKits" Multiplicity="1" />
+          <End Type="FenixModel.cdlKitsItems" Role="cdlKitsItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cdlKits">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="cdlKitsItems">
+              <PropertyRef Name="cdlKitsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CommunicationMessagesShipmentOrdersConfirmation">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MessageId" Type="Int32" Nullable="false" />
+          <Property Name="MessageTypeId" Type="Int32" Nullable="false" />
+          <Property Name="MessageDescription" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MessageDateOfReceipt" Type="DateTime" Precision="3" />
+          <Property Name="ShipmentOrderID" Type="Int32" Nullable="false" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="ContactID" Type="Int32" Nullable="false" />
+          <Property Name="Reconciliation" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyUserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CommunicationMessagesShipmentOrdersConfirmationItems">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CMSOId" Type="Int32" Nullable="false" />
+          <Property Name="SingleOrMaster" Type="Int32" Nullable="false" />
+          <Property Name="HeliosOrderRecordID" Type="Int32" />
+          <Property Name="ItemVerKit" Type="Int32" Nullable="false" />
+          <Property Name="ItemOrKitID" Type="Int32" Nullable="false" />
+          <Property Name="ItemOrKitDescription" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ItemOrKitQuantity" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="ItemOrKitUnitOfMeasureId" Type="Int32" Nullable="false" />
+          <Property Name="ItemOrKitUnitOfMeasure" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ItemOrKitQualityId" Type="Int32" Nullable="false" />
+          <Property Name="ItemOrKitQualityCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IncotermsId" Type="Int32" />
+          <Property Name="IncotermDescription" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="RealDateOfDelivery" Type="DateTime" Precision="3" />
+          <Property Name="RealItemOrKitQuantity" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="RealItemOrKitQualityID" Type="Int32" />
+          <Property Name="RealItemOrKitQuality" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="KitSNs" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyUserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="cdlItemTypes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DescriptionCz" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DescriptionEng" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsSent" Type="Int32" Nullable="false" />
+          <Property Name="SentDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyUserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CommunicationMessagesKittingsSent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MessageId" Type="Int32" Nullable="false" />
+          <Property Name="MessageType" Type="Int32" Nullable="false" />
+          <Property Name="MessageDescription" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MessageDateOfShipment" Type="DateTime" Precision="3" />
+          <Property Name="MessageStatusId" Type="Int32" Nullable="false" />
+          <Property Name="HeliosOrderId" Type="Int32" Nullable="false" />
+          <Property Name="KitDateOfDelivery" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsManually" Type="Boolean" />
+          <Property Name="Notice" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StockId" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyUserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CommunicationMessagesKittingsSentItems">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CMSOId" Type="Int32" Nullable="false" />
+          <Property Name="HeliosOrderID" Type="Int32" Nullable="false" />
+          <Property Name="HeliosOrderRecordId" Type="Int32" Nullable="false" />
+          <Property Name="KitId" Type="Int32" Nullable="false" />
+          <Property Name="KitDescription" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="KitQuantity" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="KitQuantityDelivered" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="MeasuresID" Type="Int32" Nullable="false" />
+          <Property Name="KitUnitOfMeasure" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KitQualityId" Type="Int32" Nullable="false" />
+          <Property Name="KitQualityCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CardStockItemsId" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyUserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CommunicationMessagesReceptionSent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MessageId" Type="Int32" Nullable="false" />
+          <Property Name="MessageType" Type="Int32" Nullable="false" />
+          <Property Name="MessageDescription" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MessageDateOfShipment" Type="DateTime" Precision="3" />
+          <Property Name="MessageStatusId" Type="Int32" Nullable="false" />
+          <Property Name="HeliosOrderId" Type="Int32" Nullable="false" />
+          <Property Name="ItemSupplierId" Type="Int32" Nullable="false" />
+          <Property Name="ItemSupplierDescription" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ItemDateOfDelivery" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsManually" Type="Boolean" Nullable="false" />
+          <Property Name="StockId" Type="Int32" />
+          <Property Name="Notice" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RadaDokladu" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="PoradoveCislo" Type="Int32" />
+          <Property Name="RadaPlusPorCislo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyUserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="cdlMessageTypes" Relationship="FenixModel.FK_CommunicationMessagesReceptionSent_cdlMessageTypes" FromRole="CommunicationMessagesReceptionSent" ToRole="cdlMessageTypes" />
+          <NavigationProperty Name="cdlStatuses" Relationship="FenixModel.FK_CommunicationMessagesReceptionSent_cdlStatuses" FromRole="CommunicationMessagesReceptionSent" ToRole="cdlStatuses" />
+          <NavigationProperty Name="CommunicationMessagesReceptionConfirmation" Relationship="FenixModel.FK_CommunicationMessagesReceptionConfirmation_CommunicationMessagesReceptionSent" FromRole="CommunicationMessagesReceptionSent" ToRole="CommunicationMessagesReceptionConfirmation" />
+          <NavigationProperty Name="CommunicationMessagesReceptionSentItems" Relationship="FenixModel.FK_CommunicationMessagesReceptionSentItems_CommunicationMessagesReceptionSent" FromRole="CommunicationMessagesReceptionSent" ToRole="CommunicationMessagesReceptionSentItems" />
+        </EntityType>
+        <EntityType Name="CommunicationMessagesReceptionSentItems">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CMSOId" Type="Int32" Nullable="false" />
+          <Property Name="HeliosOrderId" Type="Int32" />
+          <Property Name="HeliosOrderRecordId" Type="Int32" />
+          <Property Name="ItemID" Type="Int32" Nullable="false" />
+          <Property Name="GroupGoods" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="ItemCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ItemDescription" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="ItemQuantity" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="ItemQuantityDelivered" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="MeasuresID" Type="Int32" Nullable="false" />
+          <Property Name="ItemUnitOfMeasure" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ItemQualityId" Type="Int32" Nullable="false" />
+          <Property Name="ItemQualityCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SourceId" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyUserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CommunicationMessagesReceptionSent" Relationship="FenixModel.FK_CommunicationMessagesReceptionSentItems_CommunicationMessagesReceptionSent" FromRole="CommunicationMessagesReceptionSentItems" ToRole="CommunicationMessagesReceptionSent" />
+        </EntityType>
+        <Association Name="FK_CommunicationMessagesReceptionSent_cdlMessageTypes">
+          <End Type="FenixModel.cdlMessageTypes" Role="cdlMessageTypes" Multiplicity="1" />
+          <End Type="FenixModel.CommunicationMessagesReceptionSent" Role="CommunicationMessagesReceptionSent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cdlMessageTypes">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CommunicationMessagesReceptionSent">
+              <PropertyRef Name="MessageType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CommunicationMessagesReceptionSent_cdlStatuses">
+          <End Type="FenixModel.cdlStatuses" Role="cdlStatuses" Multiplicity="1" />
+          <End Type="FenixModel.CommunicationMessagesReceptionSent" Role="CommunicationMessagesReceptionSent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cdlStatuses">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CommunicationMessagesReceptionSent">
+              <PropertyRef Name="MessageStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CommunicationMessagesReceptionConfirmation_CommunicationMessagesReceptionSent">
+          <End Type="FenixModel.CommunicationMessagesReceptionSent" Role="CommunicationMessagesReceptionSent" Multiplicity="1" />
+          <End Type="FenixModel.CommunicationMessagesReceptionConfirmation" Role="CommunicationMessagesReceptionConfirmation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CommunicationMessagesReceptionSent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CommunicationMessagesReceptionConfirmation">
+              <PropertyRef Name="CommunicationMessagesSentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CommunicationMessagesReceptionSentItems_CommunicationMessagesReceptionSent">
+          <End Type="FenixModel.CommunicationMessagesReceptionSent" Role="CommunicationMessagesReceptionSent" Multiplicity="1" />
+          <End Type="FenixModel.CommunicationMessagesReceptionSentItems" Role="CommunicationMessagesReceptionSentItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CommunicationMessagesReceptionSent">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CommunicationMessagesReceptionSentItems">
+              <PropertyRef Name="CMSOId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CommunicationMessagesKittingsApprovalKitsSent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApprovalID" Type="Int32" Nullable="false" />
+          <Property Name="KitID" Type="Int32" Nullable="false" />
+          <Property Name="KitDescription" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="KitQuantity" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="KitUnitOfMeasureID" Type="Int32" Nullable="false" />
+          <Property Name="KitUnitOfMeasure" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="KitQualityId" Type="Int32" Nullable="false" />
+          <Property Name="KitQuality" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyUserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CommunicationMessagesKittingsApprovalKitsSerNumSent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ApprovalKitsID" Type="Int32" Nullable="false" />
+          <Property Name="SN1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="SN2" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyUserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CommunicationMessagesKittingsApprovalSent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MessageId" Type="Int32" Nullable="false" />
+          <Property Name="MessageTypeID" Type="Int32" Nullable="false" />
+          <Property Name="MessageDescription" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MessageDateOfShipment" Type="DateTime" Precision="3" />
+          <Property Name="RequiredReleaseDate" Type="DateTime" Precision="3" />
+          <Property Name="MessageStatusID" Type="Int32" Nullable="false" />
+          <Property Name="Released" Type="Boolean" Nullable="false" />
+          <Property Name="HeliosOrderID" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyUserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CommunicationMessagesShipmentOrdersSent">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MessageId" Type="Int32" Nullable="false" />
+          <Property Name="MessageTypeId" Type="Int32" Nullable="false" />
+          <Property Name="MessageDescription" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MessageDateOfShipment" Type="DateTime" Precision="3" />
+          <Property Name="RequiredDateOfShipment" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MessageStatusId" Type="Int32" Nullable="false" />
+          <Property Name="HeliosOrderId" Type="Int32" Nullable="false" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="CustomerName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerAddress1" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerAddress2" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerAddress3" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerCity" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerZipCode" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerCountryISO" Type="String" MaxLength="3" FixedLength="true" Unicode="false" />
+          <Property Name="ContactID" Type="Int32" Nullable="false" />
+          <Property Name="ContactTitle" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="ContactFirstName" Type="String" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="ContactLastName" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="ContactPhoneNumber1" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="ContactPhoneNumber2" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="ContactFaxNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="ContactEmail" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsManually" Type="Boolean" />
+          <Property Name="StockId" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyUserId" Type="Int32" Nullable="false" />
+          <Property Name="IdWf" Type="Int32" />
+          <Property Name="Remark" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CommunicationMessagesShipmentOrdersSentItems">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CMSOId" Type="Int32" Nullable="false" />
+          <Property Name="SingleOrMaster" Type="Int32" Nullable="false" />
+          <Property Name="ItemVerKit" Type="Int32" Nullable="false" />
+          <Property Name="ItemOrKitID" Type="Int32" Nullable="false" />
+          <Property Name="ItemOrKitDescription" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ItemOrKitQuantity" Type="Decimal" Nullable="false" Precision="18" Scale="3" />
+          <Property Name="ItemOrKitQuantityReal" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="ItemOrKitUnitOfMeasureId" Type="Int32" Nullable="false" />
+          <Property Name="ItemOrKitUnitOfMeasure" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ItemOrKitQualityId" Type="Int32" Nullable="false" />
+          <Property Name="ItemOrKitQualityCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ItemType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IncotermsId" Type="Int32" Nullable="false" />
+          <Property Name="Incoterms" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PackageValue" Type="Int32" />
+          <Property Name="ShipmentOrderSource" Type="Int32" Nullable="false" />
+          <Property Name="VydejkyId" Type="Int32" />
+          <Property Name="CardStockItemsId" Type="Int32" />
+          <Property Name="HeliosOrderRecordId" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyUserId" Type="Int32" Nullable="false" />
+          <Property Name="IdRowReleaseNote" Type="Int32" />
+        </EntityType>
+        <EntityType Name="cdlItems">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="GroupGoods" Type="String" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DescriptionCz" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DescriptionEng" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MeasuresId" Type="Int32" Nullable="false" />
+          <Property Name="ItemTypesId" Type="Int32" Nullable="false" />
+          <Property Name="PackagingId" Type="Int32" />
+          <Property Name="GroupsId" Type="Int32" />
+          <Property Name="ItemType" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="PC" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Packaging" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="IsSent" Type="Boolean" Nullable="false" />
+          <Property Name="SentDate" Type="DateTime" Precision="3" />
+          <Property Name="ItemTypeDesc1" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="ItemTypeDesc2" Type="String" Nullable="false" MaxLength="35" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyUserId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="cdlMeasures">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DescriptionCz" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="DescriptionEng" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="IsSent" Type="Boolean" Nullable="false" />
+          <Property Name="SentDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ModifyDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifyUserId" Type="Int32" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FenixModelStoreContainer" CdmEntityContainer="FenixEntities">
+          <EntitySetMapping Name="AppLog">
+            <EntityTypeMapping TypeName="FenixModel.AppLog">
+              <MappingFragment StoreEntitySet="AppLog">
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="XmlMessage" ColumnName="XmlMessage" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cdlKits">
+            <EntityTypeMapping TypeName="FenixModel.cdlKits">
+              <MappingFragment StoreEntitySet="cdlKits">
+                <ScalarProperty Name="Multiplayer" ColumnName="Multiplayer" />
+                <ScalarProperty Name="Packaging" ColumnName="Packaging" />
+                <ScalarProperty Name="GroupsId" ColumnName="GroupsId" />
+                <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SentDate" ColumnName="SentDate" />
+                <ScalarProperty Name="IsSent" ColumnName="IsSent" />
+                <ScalarProperty Name="KitQualitiesCode" ColumnName="KitQualitiesCode" />
+                <ScalarProperty Name="KitQualitiesId" ColumnName="KitQualitiesId" />
+                <ScalarProperty Name="MeasuresCode" ColumnName="MeasuresCode" />
+                <ScalarProperty Name="MeasuresId" ColumnName="MeasuresId" />
+                <ScalarProperty Name="DescriptionEng" ColumnName="DescriptionEng" />
+                <ScalarProperty Name="DescriptionCz" ColumnName="DescriptionCz" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cdlKitsItems">
+            <EntityTypeMapping TypeName="FenixModel.cdlKitsItems">
+              <MappingFragment StoreEntitySet="cdlKitsItems">
+                <ScalarProperty Name="SentDate" ColumnName="SentDate" />
+                <ScalarProperty Name="IsSent" ColumnName="IsSent" />
+                <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="PackageType" ColumnName="PackageType" />
+                <ScalarProperty Name="ItemOrKitQuantity" ColumnName="ItemOrKitQuantity" />
+                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+                <ScalarProperty Name="ItemGroupGoods" ColumnName="ItemGroupGoods" />
+                <ScalarProperty Name="ItemOrKitId" ColumnName="ItemOrKitId" />
+                <ScalarProperty Name="ItemVerKit" ColumnName="ItemVerKit" />
+                <ScalarProperty Name="cdlKitsId" ColumnName="cdlKitsId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cdlMessageTypes">
+            <EntityTypeMapping TypeName="FenixModel.cdlMessageTypes">
+              <MappingFragment StoreEntitySet="cdlMessageTypes">
+                <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SentDate" ColumnName="SentDate" />
+                <ScalarProperty Name="IsSent" ColumnName="IsSent" />
+                <ScalarProperty Name="DescriptionEng" ColumnName="DescriptionEng" />
+                <ScalarProperty Name="DescriptionCz" ColumnName="DescriptionCz" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cdlReturnValues">
+            <EntityTypeMapping TypeName="FenixModel.cdlReturnValues">
+              <MappingFragment StoreEntitySet="cdlReturnValues">
+                <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SentDate" ColumnName="SentDate" />
+                <ScalarProperty Name="IsSent" ColumnName="IsSent" />
+                <ScalarProperty Name="DescriptionEng" ColumnName="DescriptionEng" />
+                <ScalarProperty Name="DescriptionCz" ColumnName="DescriptionCz" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cdlStatuses">
+            <EntityTypeMapping TypeName="FenixModel.cdlStatuses">
+              <MappingFragment StoreEntitySet="cdlStatuses">
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="SentDate" ColumnName="SentDate" />
+                <ScalarProperty Name="IsSent" ColumnName="IsSent" />
+                <ScalarProperty Name="DescriptionEng" ColumnName="DescriptionEng" />
+                <ScalarProperty Name="DescriptionCz" ColumnName="DescriptionCz" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CommunicationMessagesReceptionConfirmation">
+            <EntityTypeMapping TypeName="FenixModel.CommunicationMessagesReceptionConfirmation">
+              <MappingFragment StoreEntitySet="CommunicationMessagesReceptionConfirmation">
+                <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Reconciliation" ColumnName="Reconciliation" />
+                <ScalarProperty Name="ItemSupplierDescription" ColumnName="ItemSupplierDescription" />
+                <ScalarProperty Name="ItemSupplierId" ColumnName="ItemSupplierId" />
+                <ScalarProperty Name="CommunicationMessagesSentId" ColumnName="CommunicationMessagesSentId" />
+                <ScalarProperty Name="MessageDateOfReceipt" ColumnName="MessageDateOfReceipt" />
+                <ScalarProperty Name="MessageDescription" ColumnName="MessageDescription" />
+                <ScalarProperty Name="MessageTypeId" ColumnName="MessageTypeId" />
+                <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="prCMRCins" FunctionName="FenixModel.Store.prCMRCins" />
+          <FunctionImportMapping FunctionImportName="prCMRCKins" FunctionName="FenixModel.Store.prCMRCKins" />
+          <FunctionImportMapping FunctionImportName="prAppLogWriteNew" FunctionName="FenixModel.Store.prAppLogWriteNew" />
+          <EntitySetMapping Name="CommunicationMessagesShipmentOrdersConfirmation">
+            <EntityTypeMapping TypeName="FenixModel.CommunicationMessagesShipmentOrdersConfirmation">
+              <MappingFragment StoreEntitySet="CommunicationMessagesShipmentOrdersConfirmation">
+                <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Reconciliation" ColumnName="Reconciliation" />
+                <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="ShipmentOrderID" ColumnName="ShipmentOrderID" />
+                <ScalarProperty Name="MessageDateOfReceipt" ColumnName="MessageDateOfReceipt" />
+                <ScalarProperty Name="MessageDescription" ColumnName="MessageDescription" />
+                <ScalarProperty Name="MessageTypeId" ColumnName="MessageTypeId" />
+                <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CommunicationMessagesShipmentOrdersConfirmationItems">
+            <EntityTypeMapping TypeName="FenixModel.CommunicationMessagesShipmentOrdersConfirmationItems">
+              <MappingFragment StoreEntitySet="CommunicationMessagesShipmentOrdersConfirmationItems">
+                <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="KitSNs" ColumnName="KitSNs" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="RealItemOrKitQuality" ColumnName="RealItemOrKitQuality" />
+                <ScalarProperty Name="RealItemOrKitQualityID" ColumnName="RealItemOrKitQualityID" />
+                <ScalarProperty Name="RealItemOrKitQuantity" ColumnName="RealItemOrKitQuantity" />
+                <ScalarProperty Name="RealDateOfDelivery" ColumnName="RealDateOfDelivery" />
+                <ScalarProperty Name="IncotermDescription" ColumnName="IncotermDescription" />
+                <ScalarProperty Name="IncotermsId" ColumnName="IncotermsId" />
+                <ScalarProperty Name="ItemOrKitQualityCode" ColumnName="ItemOrKitQualityCode" />
+                <ScalarProperty Name="ItemOrKitQualityId" ColumnName="ItemOrKitQualityId" />
+                <ScalarProperty Name="ItemOrKitUnitOfMeasure" ColumnName="ItemOrKitUnitOfMeasure" />
+                <ScalarProperty Name="ItemOrKitUnitOfMeasureId" ColumnName="ItemOrKitUnitOfMeasureId" />
+                <ScalarProperty Name="ItemOrKitQuantity" ColumnName="ItemOrKitQuantity" />
+                <ScalarProperty Name="ItemOrKitDescription" ColumnName="ItemOrKitDescription" />
+                <ScalarProperty Name="ItemOrKitID" ColumnName="ItemOrKitID" />
+                <ScalarProperty Name="ItemVerKit" ColumnName="ItemVerKit" />
+                <ScalarProperty Name="HeliosOrderRecordID" ColumnName="HeliosOrderRecordID" />
+                <ScalarProperty Name="SingleOrMaster" ColumnName="SingleOrMaster" />
+                <ScalarProperty Name="CMSOId" ColumnName="CMSOId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="prKiSHCins" FunctionName="FenixModel.Store.prKiSHCins" />
+          <FunctionImportMapping FunctionImportName="prCMReturn" FunctionName="FenixModel.Store.prCMReturn" />
+          <EntitySetMapping Name="cdlItemTypes">
+            <EntityTypeMapping TypeName="FenixModel.cdlItemTypes">
+              <MappingFragment StoreEntitySet="cdlItemTypes">
+                <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SentDate" ColumnName="SentDate" />
+                <ScalarProperty Name="IsSent" ColumnName="IsSent" />
+                <ScalarProperty Name="DescriptionEng" ColumnName="DescriptionEng" />
+                <ScalarProperty Name="DescriptionCz" ColumnName="DescriptionCz" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="prGetIntValueFromCounter" FunctionName="FenixModel.Store.prGetIntValueFromCounter" />
+          <FunctionImportMapping FunctionImportName="prCdlItemsSetSent" FunctionName="FenixModel.Store.prCdlItemsSetSent" />
+          <FunctionImportMapping FunctionImportName="prCdlKitsSetSent" FunctionName="FenixModel.Store.prCdlKitsSetSent" />
+          <EntitySetMapping Name="CommunicationMessagesKittingsSent">
+            <EntityTypeMapping TypeName="FenixModel.CommunicationMessagesKittingsSent">
+              <MappingFragment StoreEntitySet="CommunicationMessagesKittingsSent">
+                <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="StockId" ColumnName="StockId" />
+                <ScalarProperty Name="Notice" ColumnName="Notice" />
+                <ScalarProperty Name="IsManually" ColumnName="IsManually" />
+                <ScalarProperty Name="KitDateOfDelivery" ColumnName="KitDateOfDelivery" />
+                <ScalarProperty Name="HeliosOrderId" ColumnName="HeliosOrderId" />
+                <ScalarProperty Name="MessageStatusId" ColumnName="MessageStatusId" />
+                <ScalarProperty Name="MessageDateOfShipment" ColumnName="MessageDateOfShipment" />
+                <ScalarProperty Name="MessageDescription" ColumnName="MessageDescription" />
+                <ScalarProperty Name="MessageType" ColumnName="MessageType" />
+                <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CommunicationMessagesKittingsSentItems">
+            <EntityTypeMapping TypeName="FenixModel.CommunicationMessagesKittingsSentItems">
+              <MappingFragment StoreEntitySet="CommunicationMessagesKittingsSentItems">
+                <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CardStockItemsId" ColumnName="CardStockItemsId" />
+                <ScalarProperty Name="KitQualityCode" ColumnName="KitQualityCode" />
+                <ScalarProperty Name="KitQualityId" ColumnName="KitQualityId" />
+                <ScalarProperty Name="KitUnitOfMeasure" ColumnName="KitUnitOfMeasure" />
+                <ScalarProperty Name="MeasuresID" ColumnName="MeasuresID" />
+                <ScalarProperty Name="KitQuantityDelivered" ColumnName="KitQuantityDelivered" />
+                <ScalarProperty Name="KitQuantity" ColumnName="KitQuantity" />
+                <ScalarProperty Name="KitDescription" ColumnName="KitDescription" />
+                <ScalarProperty Name="KitId" ColumnName="KitId" />
+                <ScalarProperty Name="HeliosOrderRecordId" ColumnName="HeliosOrderRecordId" />
+                <ScalarProperty Name="HeliosOrderID" ColumnName="HeliosOrderID" />
+                <ScalarProperty Name="CMSOId" ColumnName="CMSOId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CommunicationMessagesReceptionSent">
+            <EntityTypeMapping TypeName="FenixModel.CommunicationMessagesReceptionSent">
+              <MappingFragment StoreEntitySet="CommunicationMessagesReceptionSent">
+                <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="RadaPlusPorCislo" ColumnName="RadaPlusPorCislo" />
+                <ScalarProperty Name="PoradoveCislo" ColumnName="PoradoveCislo" />
+                <ScalarProperty Name="RadaDokladu" ColumnName="RadaDokladu" />
+                <ScalarProperty Name="Notice" ColumnName="Notice" />
+                <ScalarProperty Name="StockId" ColumnName="StockId" />
+                <ScalarProperty Name="IsManually" ColumnName="IsManually" />
+                <ScalarProperty Name="ItemDateOfDelivery" ColumnName="ItemDateOfDelivery" />
+                <ScalarProperty Name="ItemSupplierDescription" ColumnName="ItemSupplierDescription" />
+                <ScalarProperty Name="ItemSupplierId" ColumnName="ItemSupplierId" />
+                <ScalarProperty Name="HeliosOrderId" ColumnName="HeliosOrderId" />
+                <ScalarProperty Name="MessageStatusId" ColumnName="MessageStatusId" />
+                <ScalarProperty Name="MessageDateOfShipment" ColumnName="MessageDateOfShipment" />
+                <ScalarProperty Name="MessageDescription" ColumnName="MessageDescription" />
+                <ScalarProperty Name="MessageType" ColumnName="MessageType" />
+                <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CommunicationMessagesReceptionSentItems">
+            <EntityTypeMapping TypeName="FenixModel.CommunicationMessagesReceptionSentItems">
+              <MappingFragment StoreEntitySet="CommunicationMessagesReceptionSentItems">
+                <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SourceId" ColumnName="SourceId" />
+                <ScalarProperty Name="ItemQualityCode" ColumnName="ItemQualityCode" />
+                <ScalarProperty Name="ItemQualityId" ColumnName="ItemQualityId" />
+                <ScalarProperty Name="ItemUnitOfMeasure" ColumnName="ItemUnitOfMeasure" />
+                <ScalarProperty Name="MeasuresID" ColumnName="MeasuresID" />
+                <ScalarProperty Name="ItemQuantityDelivered" ColumnName="ItemQuantityDelivered" />
+                <ScalarProperty Name="ItemQuantity" ColumnName="ItemQuantity" />
+                <ScalarProperty Name="ItemDescription" ColumnName="ItemDescription" />
+                <ScalarProperty Name="ItemCode" ColumnName="ItemCode" />
+                <ScalarProperty Name="GroupGoods" ColumnName="GroupGoods" />
+                <ScalarProperty Name="ItemID" ColumnName="ItemID" />
+                <ScalarProperty Name="HeliosOrderRecordId" ColumnName="HeliosOrderRecordId" />
+                <ScalarProperty Name="HeliosOrderId" ColumnName="HeliosOrderId" />
+                <ScalarProperty Name="CMSOId" ColumnName="CMSOId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CommunicationMessagesKittingsApprovalKitsSent">
+            <EntityTypeMapping TypeName="FenixModel.CommunicationMessagesKittingsApprovalKitsSent">
+              <MappingFragment StoreEntitySet="CommunicationMessagesKittingsApprovalKitsSent">
+                <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="KitQuality" ColumnName="KitQuality" />
+                <ScalarProperty Name="KitQualityId" ColumnName="KitQualityId" />
+                <ScalarProperty Name="KitUnitOfMeasure" ColumnName="KitUnitOfMeasure" />
+                <ScalarProperty Name="KitUnitOfMeasureID" ColumnName="KitUnitOfMeasureID" />
+                <ScalarProperty Name="KitQuantity" ColumnName="KitQuantity" />
+                <ScalarProperty Name="KitDescription" ColumnName="KitDescription" />
+                <ScalarProperty Name="KitID" ColumnName="KitID" />
+                <ScalarProperty Name="ApprovalID" ColumnName="ApprovalID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CommunicationMessagesKittingsApprovalKitsSerNumSent">
+            <EntityTypeMapping TypeName="FenixModel.CommunicationMessagesKittingsApprovalKitsSerNumSent">
+              <MappingFragment StoreEntitySet="CommunicationMessagesKittingsApprovalKitsSerNumSent">
+                <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SN2" ColumnName="SN2" />
+                <ScalarProperty Name="SN1" ColumnName="SN1" />
+                <ScalarProperty Name="ApprovalKitsID" ColumnName="ApprovalKitsID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CommunicationMessagesKittingsApprovalSent">
+            <EntityTypeMapping TypeName="FenixModel.CommunicationMessagesKittingsApprovalSent">
+              <MappingFragment StoreEntitySet="CommunicationMessagesKittingsApprovalSent">
+                <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="HeliosOrderID" ColumnName="HeliosOrderID" />
+                <ScalarProperty Name="Released" ColumnName="Released" />
+                <ScalarProperty Name="MessageStatusID" ColumnName="MessageStatusID" />
+                <ScalarProperty Name="RequiredReleaseDate" ColumnName="RequiredReleaseDate" />
+                <ScalarProperty Name="MessageDateOfShipment" ColumnName="MessageDateOfShipment" />
+                <ScalarProperty Name="MessageDescription" ColumnName="MessageDescription" />
+                <ScalarProperty Name="MessageTypeID" ColumnName="MessageTypeID" />
+                <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CommunicationMessagesShipmentOrdersSent">
+            <EntityTypeMapping TypeName="FenixModel.CommunicationMessagesShipmentOrdersSent">
+              <MappingFragment StoreEntitySet="CommunicationMessagesShipmentOrdersSent">
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="IdWf" ColumnName="IdWf" />
+                <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="StockId" ColumnName="StockId" />
+                <ScalarProperty Name="IsManually" ColumnName="IsManually" />
+                <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
+                <ScalarProperty Name="ContactFaxNumber" ColumnName="ContactFaxNumber" />
+                <ScalarProperty Name="ContactPhoneNumber2" ColumnName="ContactPhoneNumber2" />
+                <ScalarProperty Name="ContactPhoneNumber1" ColumnName="ContactPhoneNumber1" />
+                <ScalarProperty Name="ContactLastName" ColumnName="ContactLastName" />
+                <ScalarProperty Name="ContactFirstName" ColumnName="ContactFirstName" />
+                <ScalarProperty Name="ContactTitle" ColumnName="ContactTitle" />
+                <ScalarProperty Name="ContactID" ColumnName="ContactID" />
+                <ScalarProperty Name="CustomerCountryISO" ColumnName="CustomerCountryISO" />
+                <ScalarProperty Name="CustomerZipCode" ColumnName="CustomerZipCode" />
+                <ScalarProperty Name="CustomerCity" ColumnName="CustomerCity" />
+                <ScalarProperty Name="CustomerAddress3" ColumnName="CustomerAddress3" />
+                <ScalarProperty Name="CustomerAddress2" ColumnName="CustomerAddress2" />
+                <ScalarProperty Name="CustomerAddress1" ColumnName="CustomerAddress1" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="HeliosOrderId" ColumnName="HeliosOrderId" />
+                <ScalarProperty Name="MessageStatusId" ColumnName="MessageStatusId" />
+                <ScalarProperty Name="RequiredDateOfShipment" ColumnName="RequiredDateOfShipment" />
+                <ScalarProperty Name="MessageDateOfShipment" ColumnName="MessageDateOfShipment" />
+                <ScalarProperty Name="MessageDescription" ColumnName="MessageDescription" />
+                <ScalarProperty Name="MessageTypeId" ColumnName="MessageTypeId" />
+                <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CommunicationMessagesShipmentOrdersSentItems">
+            <EntityTypeMapping TypeName="FenixModel.CommunicationMessagesShipmentOrdersSentItems">
+              <MappingFragment StoreEntitySet="CommunicationMessagesShipmentOrdersSentItems">
+                <ScalarProperty Name="IdRowReleaseNote" ColumnName="IdRowReleaseNote" />
+                <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="HeliosOrderRecordId" ColumnName="HeliosOrderRecordId" />
+                <ScalarProperty Name="CardStockItemsId" ColumnName="CardStockItemsId" />
+                <ScalarProperty Name="VydejkyId" ColumnName="VydejkyId" />
+                <ScalarProperty Name="ShipmentOrderSource" ColumnName="ShipmentOrderSource" />
+                <ScalarProperty Name="PackageValue" ColumnName="PackageValue" />
+                <ScalarProperty Name="Incoterms" ColumnName="Incoterms" />
+                <ScalarProperty Name="IncotermsId" ColumnName="IncotermsId" />
+                <ScalarProperty Name="ItemType" ColumnName="ItemType" />
+                <ScalarProperty Name="ItemOrKitQualityCode" ColumnName="ItemOrKitQualityCode" />
+                <ScalarProperty Name="ItemOrKitQualityId" ColumnName="ItemOrKitQualityId" />
+                <ScalarProperty Name="ItemOrKitUnitOfMeasure" ColumnName="ItemOrKitUnitOfMeasure" />
+                <ScalarProperty Name="ItemOrKitUnitOfMeasureId" ColumnName="ItemOrKitUnitOfMeasureId" />
+                <ScalarProperty Name="ItemOrKitQuantityReal" ColumnName="ItemOrKitQuantityReal" />
+                <ScalarProperty Name="ItemOrKitQuantity" ColumnName="ItemOrKitQuantity" />
+                <ScalarProperty Name="ItemOrKitDescription" ColumnName="ItemOrKitDescription" />
+                <ScalarProperty Name="ItemOrKitID" ColumnName="ItemOrKitID" />
+                <ScalarProperty Name="ItemVerKit" ColumnName="ItemVerKit" />
+                <ScalarProperty Name="SingleOrMaster" ColumnName="SingleOrMaster" />
+                <ScalarProperty Name="CMSOId" ColumnName="CMSOId" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="prKittingsApprovalSetSent" FunctionName="FenixModel.Store.prKittingsApprovalSetSent" />
+          <FunctionImportMapping FunctionImportName="prKittingsOrderSetSent" FunctionName="FenixModel.Store.prKittingsOrderSetSent" />
+          <FunctionImportMapping FunctionImportName="prReceptionOrderSetSent" FunctionName="FenixModel.Store.prReceptionOrderSetSent" />
+          <FunctionImportMapping FunctionImportName="prShipmentOrderSetSent" FunctionName="FenixModel.Store.prShipmentOrderSetSent" />
+          <FunctionImportMapping FunctionImportName="prRORF1ins" FunctionName="FenixModel.Store.prRORF1ins" />
+          <FunctionImportMapping FunctionImportName="prGetAutomatStatus" FunctionName="FenixModel.Store.prGetAutomatStatus" />
+          <EntitySetMapping Name="cdlItems">
+            <EntityTypeMapping TypeName="FenixModel.cdlItems">
+              <MappingFragment StoreEntitySet="cdlItems">
+                <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ItemTypeDesc2" ColumnName="ItemTypeDesc2" />
+                <ScalarProperty Name="ItemTypeDesc1" ColumnName="ItemTypeDesc1" />
+                <ScalarProperty Name="SentDate" ColumnName="SentDate" />
+                <ScalarProperty Name="IsSent" ColumnName="IsSent" />
+                <ScalarProperty Name="Packaging" ColumnName="Packaging" />
+                <ScalarProperty Name="PC" ColumnName="PC" />
+                <ScalarProperty Name="ItemType" ColumnName="ItemType" />
+                <ScalarProperty Name="GroupsId" ColumnName="GroupsId" />
+                <ScalarProperty Name="PackagingId" ColumnName="PackagingId" />
+                <ScalarProperty Name="ItemTypesId" ColumnName="ItemTypesId" />
+                <ScalarProperty Name="MeasuresId" ColumnName="MeasuresId" />
+                <ScalarProperty Name="DescriptionEng" ColumnName="DescriptionEng" />
+                <ScalarProperty Name="DescriptionCz" ColumnName="DescriptionCz" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="GroupGoods" ColumnName="GroupGoods" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cdlMeasures">
+            <EntityTypeMapping TypeName="FenixModel.cdlMeasures">
+              <MappingFragment StoreEntitySet="cdlMeasures">
+                <ScalarProperty Name="ModifyUserId" ColumnName="ModifyUserId" />
+                <ScalarProperty Name="ModifyDate" ColumnName="ModifyDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="SentDate" ColumnName="SentDate" />
+                <ScalarProperty Name="IsSent" ColumnName="IsSent" />
+                <ScalarProperty Name="DescriptionEng" ColumnName="DescriptionEng" />
+                <ScalarProperty Name="DescriptionCz" ColumnName="DescriptionCz" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="prCMReturnedItem" FunctionName="FenixModel.Store.prCMReturnedItem" />
+          <FunctionImportMapping FunctionImportName="prCMReturnedShipment" FunctionName="FenixModel.Store.prCMReturnedShipment" />
+          <FunctionImportMapping FunctionImportName="prCMDeleteMessage" FunctionName="FenixModel.Store.prCMDeleteMessage" />
+          <FunctionImportMapping FunctionImportName="prCrmOrderC1ins" FunctionName="FenixModel.Store.prCrmOrderC1ins" />
+          <FunctionImportMapping FunctionImportName="prCrmOrderC2ins" FunctionName="FenixModel.Store.prCrmOrderC2ins" />
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

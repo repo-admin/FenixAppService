@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="eeb55500a07e457b9e4249bab1783205" Name="Diagram1">
+        <EntityTypeShape EntityType="FenixModel.AppLog" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FenixModel.cdlKits" Width="1.5" PointX="8.75" PointY="6" />
+        <EntityTypeShape EntityType="FenixModel.cdlKitsItems" Width="1.5" PointX="11" PointY="6" />
+        <EntityTypeShape EntityType="FenixModel.cdlMessageTypes" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="FenixModel.cdlReturnValues" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="FenixModel.cdlStatuses" Width="1.5" PointX="13.5" PointY="3.75" />
+        <EntityTypeShape EntityType="FenixModel.CommunicationMessagesReceptionConfirmation" Width="1.5" PointX="2.75" PointY="10.75" />
+        <AssociationConnector Association="FenixModel.FK_cdlKitsItems_cdlKits" />
+        <EntityTypeShape EntityType="FenixModel.CommunicationMessagesShipmentOrdersConfirmation" Width="1.5" PointX="9.375" PointY="10.75" />
+        <EntityTypeShape EntityType="FenixModel.CommunicationMessagesShipmentOrdersConfirmationItems" Width="4" PointX="11.375" PointY="10.75" />
+        <EntityTypeShape EntityType="FenixModel.cdlItemTypes" Width="1.5" PointX="13.375" PointY="0.75" />
+        <EntityTypeShape EntityType="FenixModel.CommunicationMessagesKittingsSent" Width="1.5" PointX="5.375" PointY="5.75" />
+        <EntityTypeShape EntityType="FenixModel.CommunicationMessagesKittingsSentItems" Width="1.5" PointX="6.375" PointY="0.75" />
+        <EntityTypeShape EntityType="FenixModel.CommunicationMessagesReceptionSent" Width="1.5" PointX="15.75" PointY="3.125" />
+        <EntityTypeShape EntityType="FenixModel.CommunicationMessagesReceptionSentItems" Width="1.5" PointX="18" PointY="4.375" />
+        <AssociationConnector Association="FenixModel.FK_CommunicationMessagesReceptionSent_cdlMessageTypes" />
+        <AssociationConnector Association="FenixModel.FK_CommunicationMessagesReceptionSent_cdlStatuses" />
+        <AssociationConnector Association="FenixModel.FK_CommunicationMessagesReceptionConfirmation_CommunicationMessagesReceptionSent" />
+        <AssociationConnector Association="FenixModel.FK_CommunicationMessagesReceptionSentItems_CommunicationMessagesReceptionSent" />
+        <EntityTypeShape EntityType="FenixModel.CommunicationMessagesKittingsApprovalKitsSent" Width="1.5" PointX="8.375" PointY="0.75" />
+        <EntityTypeShape EntityType="FenixModel.CommunicationMessagesKittingsApprovalKitsSerNumSent" Width="1.5" PointX="10.375" PointY="0.75" />
+        <EntityTypeShape EntityType="FenixModel.CommunicationMessagesKittingsApprovalSent" Width="1.5" PointX="5.375" PointY="13.75" />
+        <EntityTypeShape EntityType="FenixModel.CommunicationMessagesShipmentOrdersSent" Width="1.5" PointX="0.75" PointY="14.75" />
+        <EntityTypeShape EntityType="FenixModel.CommunicationMessagesShipmentOrdersSentItems" Width="1.5" PointX="7.375" PointY="14.75" />
+        <EntityTypeShape EntityType="FenixModel.cdlItems" Width="1.5" PointX="3.375" PointY="0.75" />
+        <EntityTypeShape EntityType="FenixModel.cdlMeasures" Width="1.5" PointX="16.375" PointY="9.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

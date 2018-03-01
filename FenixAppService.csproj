@@ -1,0 +1,250 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F8113A3D-64D4-44A1-9675-1E966AE150A3}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FenixAppService</RootNamespace>
+    <AssemblyName>FenixAppService</AssemblyName>
+    <ProjectTypeGuids>{3D9AD99F-2412-4246-B90B-4EAA41C64699};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <StartArguments>/client:"WcfTestClient.exe"</StartArguments>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
+    <XsdCodeGenEnabled>True</XsdCodeGenEnabled>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\FenixAppService.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="FenixHelper, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\FenixHelper\bin\Debug\FenixHelper.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Upc.Security">
+      <HintPath>..\..\DOTNET40\LIB\DLL\Upc.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="UpcExtensions">
+      <HintPath>..\..\DOTNET40\LIB\DLL\UpcExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="UpcUtils">
+      <HintPath>..\..\DOTNET40\LIB\DLL\UpcUtils.dll</HintPath>
+    </Reference>
+    <Reference Include="WCFExtrasPlus">
+      <HintPath>..\..\DOTNET40\LIB\DLL\WCFExtrasPlus.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActionResult.cs" />
+    <Compile Include="AppLog.cs">
+      <DependentUpon>FenixModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AuthToken.cs" />
+    <Compile Include="BC.cs" />
+    <Compile Include="cdlItems.cs">
+      <DependentUpon>FenixModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cdlItemTypes.cs">
+      <DependentUpon>FenixModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cdlKits.cs">
+      <DependentUpon>FenixModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cdlKitsItems.cs">
+      <DependentUpon>FenixModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cdlMeasures.cs">
+      <DependentUpon>FenixModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cdlMessageTypes.cs">
+      <DependentUpon>FenixModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cdlReturnValues.cs">
+      <DependentUpon>FenixModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="cdlStatuses.cs">
+      <DependentUpon>FenixModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CommunicationMessagesKittingsApprovalKitsSent.cs">
+      <DependentUpon>FenixModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CommunicationMessagesKittingsApprovalKitsSerNumSent.cs">
+      <DependentUpon>FenixModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CommunicationMessagesKittingsApprovalSent.cs">
+      <DependentUpon>FenixModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CommunicationMessagesKittingsSent.cs">
+      <DependentUpon>FenixModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CommunicationMessagesKittingsSentItems.cs">
+      <DependentUpon>FenixModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CommunicationMessagesReceptionConfirmation.cs">
+      <DependentUpon>FenixModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CommunicationMessagesReceptionSent.cs">
+      <DependentUpon>FenixModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CommunicationMessagesReceptionSentItems.cs">
+      <DependentUpon>FenixModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CommunicationMessagesShipmentOrdersConfirmation.cs">
+      <DependentUpon>FenixModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CommunicationMessagesShipmentOrdersConfirmationItems.cs">
+      <DependentUpon>FenixModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CommunicationMessagesShipmentOrdersSent.cs">
+      <DependentUpon>FenixModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CommunicationMessagesShipmentOrdersSentItems.cs">
+      <DependentUpon>FenixModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FenixModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FenixModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FenixModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FenixModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FenixModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FenixModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="IFenixAppSvc.cs" />
+    <Compile Include="ProcedureResult.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="FenixAppSvc.cs" />
+    <Compile Include="Service References\NDLInterfaces\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>FenixModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>FenixModel.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="FenixModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>FenixModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="FenixModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FenixModel.edmx</DependentUpon>
+      <LastGenOutput>FenixModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="FenixModel.edmx.diagram">
+      <DependentUpon>FenixModel.edmx</DependentUpon>
+    </None>
+    <None Include="FenixModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>FenixModel.edmx</DependentUpon>
+      <LastGenOutput>FenixModel.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Service References\NDLInterfaces\FenixAppService.NDLInterfaces.UPWSI0Response.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\NDLInterfaces\NDL_Interfaces.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\NDLInterfaces\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\NDLInterfaces\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\NDLInterfaces\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\NDLInterfaces\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <VSToolsPath Condition="'$(VSToolsPath)' == '' and '$(VisualStudioVersion)' != '' and '$(VisualStudioVersion)' != '11.0'">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio</VSToolsPath>
+    <WcfServiceModelTargetPath>$(VSToolsPath)\WCF</WcfServiceModelTargetPath>
+  </PropertyGroup>
+  <Import Project="$(WcfServiceModelTargetPath)\Microsoft.VisualStudio.ServiceModel.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{3D9AD99F-2412-4246-B90B-4EAA41C64699}">
+        <WcfProjectProperties>
+          <AutoStart>True</AutoStart>
+        </WcfProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
