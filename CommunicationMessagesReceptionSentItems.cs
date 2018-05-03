@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace FenixAppService
+namespace Fenix
 {
     using System;
     using System.Collections.Generic;

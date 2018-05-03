@@ -1,9 +1,9 @@
 ﻿using System.Runtime.Serialization;
 
-namespace FenixAppService
+namespace Fenix
 {
 	/// <summary>Autentifikační token.</summary>
-	[DataContract(Namespace = BC.APP_NAMESPACE)]
+	[DataContract(Namespace = Bc.AppNamespace)]
 	public class AuthToken
 	{
 		/// <summary>Hodnota tokenu zakódována v base-64.</summary>

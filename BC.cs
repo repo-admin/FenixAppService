@@ -1,89 +1,48 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace FenixAppService
+namespace Fenix
 {
 	/// <summary>
-	/// 
+	/// Třída obsahující konstanty a jiné pomocné hodnoty a metody
 	/// </summary>
-	internal class BC
+	internal class Bc
 	{
-		internal const string APP_NAMESPACE = "https://ws8websecapp.upc.cz/FenixAppService";
+		internal const string AppNamespace = "https://ws8websecapp.upc.cz/FenixAppService";
 
 		/// <summary>
-		/// URL na w3.org XML Schema
+		/// Vrací url na w3.org XML Schema
 		/// <value>http://www.w3.org/2001/XMLSchema</value>
 		/// </summary>
-		internal const string URL_W3_ORG_SCHEMA = "http://www.w3.org/2001/XMLSchema";
+		internal const string UrlW3OrgSchema = "http://www.w3.org/2001/XMLSchema";
 
 		/// <summary>
-		/// OK
+		/// Vrací hodnotu konstanty 'OK'
 		/// <value>0</value>
 		/// </summary>
-		internal const int OK = 0;
+		internal const int Ok = 0;
 
-		/// <summary>
-		/// Not OK
-		/// <value>-1</value>
-		/// </summary>
-		internal const int NOT_OK = -1;
-
-		/// <summary>
-		/// do ND se nepodařilo správně zapsat
-		/// <value>2</value>
-		/// </summary>
-		internal const int WRITE_TO_ND_NOT_OK = 2;
-
-		/// <summary>
-		/// do ND se podařilo správně zapsat
-		/// <value>3</value>
-		/// </summary>
-		internal const int WRITE_TO_ND_OK = 3;
-
-		internal const string UNKNOWN = "Unknown";
+        /// <summary>
+        /// Vrací hodnotu konstanty 'NOT OK'
+        /// <value>-1</value>
+        /// </summary>
+        internal const int NotOk = -1;
+	
 
 		#region Properties
 
-		internal static string ZczExtRdrConnectionString
-		{
-			get { try { return ConfigurationManager.ConnectionStrings["ZCZEXT"].ConnectionString; } catch { return String.Empty; } }
-		}
-
+        /// <summary>
+        /// Vrací hodnotu 'secret' klíče specifikovaného v aplikačním config souboru, jinak <see cref="string.Empty"/>
+        /// </summary>
 		internal static string SecretKey
 		{
 			get { try { return ConfigurationManager.AppSettings["SecretKey"].Trim(); } catch { return String.Empty; } }
 		}
-		
-		internal static string Login
-		{
-			get { try { return ConfigurationManager.AppSettings["Login"].Trim(); } catch { return String.Empty; } }
-		}
 
-		internal static string Password
-		{
-			get { try { return ConfigurationManager.AppSettings["Password"].Trim(); } catch { return String.Empty; } }
-		}
-
-		internal static string PartnerCode
-		{
-			get { try { return ConfigurationManager.AppSettings["PartnerCode"].Trim(); } catch { return String.Empty; } }
-		}
-
-		internal static string Encoding
-		{
-			get { try { return ConfigurationManager.AppSettings["Encoding"].Trim(); } catch { return String.Empty; } }
-		}
-
-		internal static int NumRowsToSend
-		{
-			get { try { return int.Parse(ConfigurationManager.AppSettings["NumRowsToSend"].Trim()); } catch { return 50; } }
-		}
-				
-		internal static int EFCommandTimeout
+        /// <summary>
+        /// Vrací hodnotu timeout pro p5ipojen9 do databáze specifikovaného v aplikačním config souboru, anebo '3600'
+        /// </summary>
+        internal static int DbCommandTimeout
 		{
 			get { try { return int.Parse(ConfigurationManager.AppSettings["EFCommandTimeout"].Trim()); } catch { return 3600; } }
 		}
@@ -91,22 +50,22 @@ namespace FenixAppService
 		#endregion
 		
 		/// <summary>
-		/// vytvoří chybový ProcResult
+		/// Vytvoří chybový ProcResult
 		/// </summary>
-		/// <param name="methodName"></param>
-		/// <param name="ex"></param>
+		/// <param name="methodName">Název metody</param>
+		/// <param name="exception">Instance vyjímky</param>
 		/// <returns></returns>
-		internal static ProcResult CreateErrorResult(string methodName, Exception ex)
+		internal static ProcResult CreateErrorResult(string methodName, Exception exception)
 		{
 			ProcResult result = new ProcResult();
 
-			result.ReturnValue = BC.NOT_OK;
-			result.ReturnMessage = String.Format("{0}{1}{2}", methodName, Environment.NewLine, ex.Message);
+			result.ReturnValue = Bc.NotOk;
+			result.ReturnMessage = String.Format("{0}{1}{2}", methodName, Environment.NewLine, exception.Message);
 
-			Exception innerExeption = ex.InnerException;
+			Exception innerExeption = exception.InnerException;
 			while (innerExeption != null)
 			{
-				result.ReturnMessage += result.ReturnMessage + Environment.NewLine + ex.InnerException.Message;
+				result.ReturnMessage += result.ReturnMessage + Environment.NewLine + exception.InnerException.Message;
 				innerExeption = innerExeption.InnerException;
 			}
 
@@ -114,10 +73,10 @@ namespace FenixAppService
 		}
 
 		/// <summary>
-		/// vytvoří chybové hlášení
+		/// Vytvoří chybové hlášení
 		/// </summary>
-		/// <param name="methodName"></param>
-		/// <param name="exception"></param>
+		/// <param name="methodName">Název metody</param>
+		/// <param name="exception">Instance vyjímky</param>
 		/// <returns></returns>
 		internal static string CreateErrorMessage(string methodName, Exception exception)
 		{

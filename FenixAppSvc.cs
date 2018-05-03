@@ -1,14 +1,13 @@
 ﻿using System;
+using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
+using System.Data.SqlClient;
 using UPC.Extensions.Convert;
 using UPC.Extensions.Enum;
 using UPC.Security;
 using WCFExtrasPlus.Soap;
-using FenixHelper.Common;
-using System.Data.Entity;
-using System.Data.SqlClient;
 
-namespace FenixAppService
+namespace Fenix
 {	
 	/// <summary>
 	/// Aplikační služba Fenix
@@ -29,44 +28,47 @@ namespace FenixAppService
 			CrmOrderApprovalProcess
 		}
 
-		#region jmena SP pro jednotlive typy procesu
+        #region jmena SP pro jednotlive typy procesu
 
-		/*		 
-public ProcResult ReceptionConfirmationProcess(string xmlMessage, int zicyzUserId)		db.prCMRCins(xmlMessage, retVal, retMsg);
-public ProcResult KittingConfirmationProcess(string xmlMessage, int zicyzUserId)  		db.prCMRCKins(xmlMessage, retVal, retMsg);
-public ProcResult ShipmentConfirmationProcess(string xmlMessage, int zicyzUserId)  		db.prKiSHCins(xmlMessage, retVal, retMsg);
-public ProcResult RefurbishedConfirmationProcess(string xmlMessage, int zicyzUserId)	db.prRORF1ins(xmlMessage, retVal, retMsg);
-public ProcResult ReturnedEquipmentProcess(string xmlMessage, int zicyzUserId)  		db.prCMReturn(xmlMessage, retVal, retMsg);
-public ProcResult ReturnedItemProcess(string xmlMessage, int zicyzUserId)    			vyjimka
-public ProcResult ReturnedShipmentProcess(string xmlMessage, int zicyzUserId)  			vyjimka		 
+        /*		 
+            public ProcResult ReceptionConfirmationProcess(string xmlMessage, int zicyzUserId)		db.prCMRCins(xmlMessage, retVal, retMsg);
+            public ProcResult KittingConfirmationProcess(string xmlMessage, int zicyzUserId)  		db.prCMRCKins(xmlMessage, retVal, retMsg);
+            public ProcResult ShipmentConfirmationProcess(string xmlMessage, int zicyzUserId)  		db.prKiSHCins(xmlMessage, retVal, retMsg);
+            public ProcResult RefurbishedConfirmationProcess(string xmlMessage, int zicyzUserId)	db.prRORF1ins(xmlMessage, retVal, retMsg);
+            public ProcResult ReturnedEquipmentProcess(string xmlMessage, int zicyzUserId)  		db.prCMReturn(xmlMessage, retVal, retMsg);
+            public ProcResult ReturnedItemProcess(string xmlMessage, int zicyzUserId)    			vyjimka
+            public ProcResult ReturnedShipmentProcess(string xmlMessage, int zicyzUserId)  			vyjimka		 
 		 */
 
-		#endregion
+        #endregion
 
-		#region Private Variables
+        #region Private Variables
 
-		private string appId;
-		
-		#endregion
+        /// <summary>
+        /// Identifikátor aplikace načtený z <see cref="Token"/>, jinak <see cref="string.Empty"/>
+        /// </summary>
+        private string _appId;
 
-		#region Public Methods
+        #endregion
 
-		/// <summary>
-		/// Zápis do logu aplikace (v případě xml se xml deklarace a root element se zapisují zvlášť)
-		/// </summary>
-		/// <param name="type"></param>
-		/// <param name="message"></param>
-		/// <param name="xmlDeclaration"></param>
-		/// <param name="xmlMessage"></param>
-		/// <param name="zicyzUserId"></param>
-		/// <param name="source"></param>
-		/// <returns></returns>
-		public ProcResult AppLogWriteNew(string type, string message, string xmlDeclaration, string xmlMessage, int zicyzUserId, string source)
+        #region Public Methods
+
+        /// <summary>
+        /// Zápis do logu aplikace (v případě xml se xml deklarace a root element se zapisují zvlášť)
+        /// </summary>
+        /// <param name="type">Typ zprávy</param>
+        /// <param name="message">Textová zpráva</param>
+        /// <param name="xmlDeclaration">Hodnota xml deklarace</param>
+        /// <param name="xmlMessage">Zpráva ve formátu xml</param>
+        /// <param name="zicyzUserId">Id uživatele, zapisuje se do logu spolu s výsledkem operace</param>
+        /// <param name="source">Zdroj relevantní k logované zprávě</param>
+        /// <returns>Vrací instanci třídy <see cref="ProcResult"/> popisující výsledek operace</returns>
+        public ProcResult AppLogWriteNew(string type, string message, string xmlDeclaration, string xmlMessage, int zicyzUserId, string source)
 		{
 			ProcResult result = new ProcResult();
-			result.ReturnValue = BC.NOT_OK;
+			result.ReturnValue = Bc.NotOk;
 
-			if (this.verifyToken() == false)
+			if (this.VerifyToken() == false)
 			{
 				return result;
 			}
@@ -82,13 +84,13 @@ public ProcResult ReturnedShipmentProcess(string xmlMessage, int zicyzUserId)  	
 										
 					db.prAppLogWriteNew(type, message, xmlDeclaration, xmlMessage, zicyzUserId, source, retVal, retMsg);
 
-					result.ReturnValue = retVal.Value.ToInt32(BC.NOT_OK);
+					result.ReturnValue = retVal.Value.ToInt32(Bc.NotOk);
 					result.ReturnMessage = retMsg.Value.ToString(String.Empty);
 					SoapHeaderHelper<ActionResult>.SetOutputHeader("ActionResult", new ActionResult() { StatusId = ActionStatus.Success.ToShort(), StatusDesc = "OK" });
 				}
 				catch (Exception ex)
 				{
-					result = BC.CreateErrorResult(FenixHelper.AppLog.GetMethodName(), ex);
+					result = Bc.CreateErrorResult(ApplicationLog.GetMethodName(), ex);
 					SoapHeaderHelper<ActionResult>.SetOutputHeader("ActionResult", new ActionResult() { StatusId = ActionStatus.Failure.ToShort(), StatusDesc = ex.Message });
 				}
 			}
@@ -96,180 +98,180 @@ public ProcResult ReturnedShipmentProcess(string xmlMessage, int zicyzUserId)  	
 			return result;
 		}
 
-		/// <summary>
-		/// Zápis do logu aplikace (v případě xml se xml deklarace a root element se zapisují zvlášť)		
-		/// </summary>
-		/// <param name="type"></param>
-		/// <param name="message"></param>
-		/// <param name="xmlDeclaration"></param>
-		/// <param name="xmlMessage"></param>
-		/// <param name="zicyzUserId"></param>
-		/// <param name="source"></param>
-		/// <returns></returns>
-		[Obsolete("Použijte metodu AppLogWriteNew")]
+        /// <summary>
+        /// Zápis do logu aplikace (v případě xml se xml deklarace a root element se zapisují zvlášť)		
+        /// </summary>
+        /// <param name="type">Typ zprávy</param>
+        /// <param name="message">Textová zpráva</param>
+        /// <param name="xmlDeclaration">Hodnota xml deklarace</param>
+        /// <param name="xmlMessage">Zpráva ve formátu xml</param>
+        /// <param name="zicyzUserId">Id uživatele, zapisuje se do logu spolu s výsledkem operace</param>
+        /// <param name="source">Zdroj relevantní k logované zprávě</param>
+        /// <returns>Vrací instanci třídy <see cref="ProcResult"/> popisující výsledek operace</returns>
+        [Obsolete("Použijte metodu AppLogWriteNew")]
 		public ProcResult AppLogWrite(string type, string message, string xmlDeclaration, string xmlMessage, int zicyzUserId, string source)
 		{
 			return AppLogWriteNew(type, message, xmlDeclaration, xmlMessage, zicyzUserId, source);
 		}
 
-		/// <summary>
-		/// Zápis do logu aplikace typu INFO
-		/// </summary>
-		/// <param name="message"></param>
-		/// <param name="zicyzUserId"></param>
-		/// <param name="source"></param>
-		/// <returns></returns>
-		public ProcResult AppLogWriteInfo(string message, int zicyzUserId, string source)
+        /// <summary>
+        /// Zápis do logu aplikace typu 'INFO'
+        /// </summary>
+        /// <param name="message">Textová zpráva</param>
+        /// <param name="zicyzUserId">Id uživatele, zapisuje se do logu spolu s výsledkem operace</param>
+        /// <param name="source">Zdroj relevantní k logované zprávě</param>
+        /// <returns>Vrací instanci třídy <see cref="ProcResult"/> popisující výsledek operace</returns>
+        public ProcResult AppLogWriteInfo(string message, int zicyzUserId, string source)
 		{
 			return AppLogWriteNew("INFO", message, String.Empty, String.Empty, zicyzUserId, source);
 		}
 
-		/// <summary>
-		/// Zápis do logu aplikace typu WARNING
-		/// </summary>
-		/// <param name="message"></param>
-		/// <param name="zicyzUserId"></param>
-		/// <param name="source"></param>
-		/// <returns></returns>
-		public ProcResult AppLogWriteWarning(string message, int zicyzUserId, string source)
+        /// <summary>
+        /// Zápis do logu aplikace typu 'WARNING'
+        /// </summary>
+        /// <param name="message">Textová zpráva</param>
+        /// <param name="zicyzUserId">Id uživatele, zapisuje se do logu spolu s výsledkem operace</param>
+        /// <param name="source">Zdroj relevantní k logované zprávě</param>
+        /// <returns>Vrací instanci třídy <see cref="ProcResult"/> popisující výsledek operace</returns>
+        public ProcResult AppLogWriteWarning(string message, int zicyzUserId, string source)
 		{
 			return AppLogWriteNew("WARNING", message, String.Empty, String.Empty, zicyzUserId, source);
 		}
 
-		/// <summary>
-		/// Zápis do logu aplikace typu ERROR
-		/// </summary>
-		/// <param name="message"></param>
-		/// <param name="zicyzUserId"></param>
-		/// <param name="source"></param>
-		/// <returns></returns>
-		public ProcResult AppLogWriteError(string message, int zicyzUserId, string source)
+        /// <summary>
+        /// Zápis do logu aplikace typu 'ERROR'
+        /// </summary>
+        /// <param name="message">Textová zpráva</param>
+        /// <param name="zicyzUserId">Id uživatele, zapisuje se do logu spolu s výsledkem operace</param>
+        /// <param name="source">Zdroj relevantní k logované zprávě</param>
+        /// <returns>Vrací instanci třídy <see cref="ProcResult"/> popisující výsledek operace</returns>
+        public ProcResult AppLogWriteError(string message, int zicyzUserId, string source)
 		{
 			return AppLogWriteNew("ERROR", message, String.Empty, String.Empty, zicyzUserId, source);
 		}
 
-		/// <summary>
-		/// Zápis do logu aplikace typu XML
-		/// </summary>
-		/// <param name="message"></param>
-		/// <param name="xmlDeclaration"></param>
-		/// <param name="xmlMessage"></param>		
-		/// <param name="zicyzUserId"></param>
-		/// <param name="source"></param>
-		/// <returns></returns>
-		public ProcResult AppLogWriteXml(string message, string xmlDeclaration, string xmlMessage, int zicyzUserId, string source)
+        /// <summary>
+        /// Zápis do logu aplikace typu 'XML'
+        /// </summary>
+        /// <param name="message">Textová zpráva</param>
+        /// <param name="xmlDeclaration">Hodnota xml deklarace</param>
+        /// <param name="xmlMessage">Zpráva ve formátu xml</param>		
+        /// <param name="zicyzUserId">Id uživatele, zapisuje se do logu spolu s výsledkem operace</param>
+        /// <param name="source">Zdroj relevantní k logované zprávě</param>
+        /// <returns>Vrací instanci třídy <see cref="ProcResult"/> popisující výsledek operace</returns>
+        public ProcResult AppLogWriteXml(string message, string xmlDeclaration, string xmlMessage, int zicyzUserId, string source)
 		{
 			return AppLogWriteNew("XML", message, xmlDeclaration, xmlMessage, zicyzUserId, source);
 		}
 
-		/// <summary>
-		/// Zpracování potvrzení recepce - ReceptionConfirmation (message R1)
-		/// </summary>
-		/// <param name="xmlMessage"></param>
-		/// <param name="zicyzUserId"></param>
-		/// <returns></returns>
-		public ProcResult ReceptionConfirmationProcess(string xmlMessage, int zicyzUserId)
+        /// <summary>
+        /// Zpracování potvrzení recepce - ReceptionConfirmation (message R1)
+        /// </summary>
+        /// <param name="xmlMessage">Zpráva ve formátu xml</param>
+        /// <param name="zicyzUserId">Id uživatele, zapisuje se do logu spolu s výsledkem operace</param>
+        /// <returns>Vrací instanci třídy <see cref="ProcResult"/> popisující výsledek operace</returns>
+        public ProcResult ReceptionConfirmationProcess(string xmlMessage, int zicyzUserId)
 		{			
-			return doConfirmationProcess(ProcessType.ReceptionConfirmationProcess, xmlMessage, zicyzUserId);
+			return DoConfirmationProcess(ProcessType.ReceptionConfirmationProcess, xmlMessage, zicyzUserId);
 		}
 
-		/// <summary>
-		/// Zpracování potvrzení kittingu - KittingConfirmation (message K1)
-		/// </summary>
-		/// <param name="xmlMessage"></param>
-		/// <param name="zicyzUserId"></param>
-		/// <returns></returns>
-		public ProcResult KittingConfirmationProcess(string xmlMessage, int zicyzUserId)
+        /// <summary>
+        /// Zpracování potvrzení kittingu - KittingConfirmation (message K1)
+        /// </summary>
+        /// <param name="xmlMessage">Zpráva ve formátu xml</param>
+        /// <param name="zicyzUserId">Id uživatele, zapisuje se do logu spolu s výsledkem operace</param>
+        /// <returns>Vrací instanci třídy <see cref="ProcResult"/> popisující výsledek operace</returns>
+        public ProcResult KittingConfirmationProcess(string xmlMessage, int zicyzUserId)
 		{
-			return doConfirmationProcess(ProcessType.KittingConfirmationProcess, xmlMessage, zicyzUserId);
-		}
-				
-		/// <summary>
-		/// Zpracování potvrzení závozu/expedice - ShipmentConfirmation (message S1)
-		/// </summary>
-		/// <param name="xmlMessage"></param>
-		/// <param name="zicyzUserId"></param>
-		/// <returns></returns>
-		public ProcResult ShipmentConfirmationProcess(string xmlMessage, int zicyzUserId)
-		{
-			return doConfirmationProcess(ProcessType.ShipmentConfirmationProcess, xmlMessage, zicyzUserId);
+			return DoConfirmationProcess(ProcessType.KittingConfirmationProcess, xmlMessage, zicyzUserId);
 		}
 
-		/// <summary>
-		/// Zpracování vratek(vrácená zařízení) - ReturnedEquipment (message VR1)
-		/// </summary>
-		/// <param name="xmlMessage"></param>
-		/// <param name="zicyzUserId"></param>
-		/// <returns></returns>
-		public ProcResult ReturnedEquipmentProcess(string xmlMessage, int zicyzUserId)
+        /// <summary>
+        /// Zpracování potvrzení závozu/expedice - ShipmentConfirmation (message S1)
+        /// </summary>
+        /// <param name="xmlMessage">Zpráva ve formátu xml</param>
+        /// <param name="zicyzUserId">Id uživatele, zapisuje se do logu spolu s výsledkem operace</param>
+        /// <returns>Vrací instanci třídy <see cref="ProcResult"/> popisující výsledek operace</returns>
+        public ProcResult ShipmentConfirmationProcess(string xmlMessage, int zicyzUserId)
 		{
-			return doConfirmationProcess(ProcessType.ReturnedEquipmentProcess, xmlMessage, zicyzUserId);
+			return DoConfirmationProcess(ProcessType.ShipmentConfirmationProcess, xmlMessage, zicyzUserId);
 		}
 
-		/// <summary>
-		/// Zpracování vratek(vrácené itemy) - ReturnedItem (message VR2)
-		/// </summary>
-		/// <param name="xmlMessage"></param>
-		/// <param name="zicyzUserId"></param>
-		/// <returns></returns>
-		public ProcResult ReturnedItemProcess(string xmlMessage, int zicyzUserId)
+        /// <summary>
+        /// Zpracování vratek(vrácená zařízení) - ReturnedEquipment (message VR1)
+        /// </summary>
+        /// <param name="xmlMessage">Zpráva ve formátu xml</param>
+        /// <param name="zicyzUserId">Id uživatele, zapisuje se do logu spolu s výsledkem operace</param>
+        /// <returns>Vrací instanci třídy <see cref="ProcResult"/> popisující výsledek operace</returns>
+        public ProcResult ReturnedEquipmentProcess(string xmlMessage, int zicyzUserId)
 		{
-			return doConfirmationProcess(ProcessType.ReturnedItemProcess, xmlMessage, zicyzUserId);
-		}
-				
-		/// <summary>
-		/// Zpracování vratek(závoz na repasi CPE) - ReturnedShipment (message VR3)
-		/// </summary>
-		/// <param name="xmlMessage"></param>
-		/// <param name="zicyzUserId"></param>
-		/// <returns></returns>
-		public ProcResult ReturnedShipmentProcess(string xmlMessage, int zicyzUserId)
-		{
-			return doConfirmationProcess(ProcessType.ReturnedShipmentProcess, xmlMessage, zicyzUserId);
+			return DoConfirmationProcess(ProcessType.ReturnedEquipmentProcess, xmlMessage, zicyzUserId);
 		}
 
-		/// <summary>
-		/// Repase - potvrzení naskladnění repasovaného zboží - RefurbishedConfirmation (message RF1)
-		/// </summary>
-		/// <param name="xmlMessage"></param>
-		/// <param name="zicyzUserId"></param>
-		/// <returns></returns>
-		public ProcResult RefurbishedConfirmationProcess(string xmlMessage, int zicyzUserId)
+        /// <summary>
+        /// Zpracování vratek(vrácené itemy) - ReturnedItem (message VR2)
+        /// </summary>
+        /// <param name="xmlMessage">Zpráva ve formátu xml</param>
+        /// <param name="zicyzUserId">Id uživatele, zapisuje se do logu spolu s výsledkem operace</param>
+        /// <returns>Vrací instanci třídy <see cref="ProcResult"/> popisující výsledek operace</returns>
+        public ProcResult ReturnedItemProcess(string xmlMessage, int zicyzUserId)
 		{
-			return doConfirmationProcess(ProcessType.RefurbishedConfirmationProcess, xmlMessage, zicyzUserId);
+			return DoConfirmationProcess(ProcessType.ReturnedItemProcess, xmlMessage, zicyzUserId);
 		}
 
-		/// <summary>
-		/// Zpracování vratek(závoz na repasi CPE) - ReturnedShipment (message VR3)
-		/// </summary>
-		/// <param name="xmlMessage"></param>
-		/// <param name="zicyzUserId"></param>
-		/// <returns></returns>
-		public ProcResult DeleteMessageConfirmationProcess(string xmlMessage, int zicyzUserId)
+        /// <summary>
+        /// Zpracování vratek(závoz na repasi CPE) - ReturnedShipment (message VR3)
+        /// </summary>
+        /// <param name="xmlMessage">Zpráva ve formátu xml</param>
+        /// <param name="zicyzUserId">Id uživatele, zapisuje se do logu spolu s výsledkem operace</param>
+        /// <returns>Vrací instanci třídy <see cref="ProcResult"/> popisující výsledek operace</returns>
+        public ProcResult ReturnedShipmentProcess(string xmlMessage, int zicyzUserId)
 		{
-			return doConfirmationProcess(ProcessType.DeleteMessageConfirmationProcess, xmlMessage, zicyzUserId);
+			return DoConfirmationProcess(ProcessType.ReturnedShipmentProcess, xmlMessage, zicyzUserId);
 		}
-				
-		/// <summary>
-		/// Zpracování potvrzení objednávky CRM - CrmOrderConfirmation (message C1)
-		/// </summary>
-		/// <param name="xmlMessage"></param>
-		/// <param name="zicyzUserId"></param>
-		/// <returns></returns>
-		public ProcResult CrmOrderConfirmationProcess(string xmlMessage, int zicyzUserId)
+
+        /// <summary>
+        /// Repase - potvrzení naskladnění repasovaného zboží - RefurbishedConfirmation (message RF1)
+        /// </summary>
+        /// <param name="xmlMessage">Zpráva ve formátu xml</param>
+        /// <param name="zicyzUserId">Id uživatele, zapisuje se do logu spolu s výsledkem operace</param>
+        /// <returns>Vrací instanci třídy <see cref="ProcResult"/> popisující výsledek operace</returns>
+        public ProcResult RefurbishedConfirmationProcess(string xmlMessage, int zicyzUserId)
 		{
-			return doConfirmationProcess(ProcessType.CrmOrderConfirmationProcess, xmlMessage, zicyzUserId);
+			return DoConfirmationProcess(ProcessType.RefurbishedConfirmationProcess, xmlMessage, zicyzUserId);
 		}
-				
-		/// <summary>
-		/// Zpracování odsouhlasení objednávky CRM - CrmOrderApproval (message C2)
-		/// </summary>
-		/// <param name="xmlMessage"></param>
-		/// <param name="zicyzUserId"></param>
-		/// <returns></returns>
-		public ProcResult CrmOrderApprovalProcess(string xmlMessage, int zicyzUserId)
+
+        /// <summary>
+        /// Zpracování vratek(závoz na repasi CPE) - ReturnedShipment (message VR3)
+        /// </summary>
+        /// <param name="xmlMessage">Zpráva ve formátu xml</param>
+        /// <param name="zicyzUserId">Id uživatele, zapisuje se do logu spolu s výsledkem operace</param>
+        /// <returns>Vrací instanci třídy <see cref="ProcResult"/> popisující výsledek operace</returns>
+        public ProcResult DeleteMessageConfirmationProcess(string xmlMessage, int zicyzUserId)
 		{
-			return doConfirmationProcess(ProcessType.CrmOrderApprovalProcess, xmlMessage, zicyzUserId);
+			return DoConfirmationProcess(ProcessType.DeleteMessageConfirmationProcess, xmlMessage, zicyzUserId);
+		}
+
+        /// <summary>
+        /// Zpracování potvrzení objednávky CRM - CrmOrderConfirmation (message C1)
+        /// </summary>
+        /// <param name="xmlMessage">Zpráva ve formátu xml</param>
+        /// <param name="zicyzUserId">Id uživatele, zapisuje se do logu spolu s výsledkem operace</param>
+        /// <returns>Vrací instanci třídy <see cref="ProcResult"/> popisující výsledek operace</returns>
+        public ProcResult CrmOrderConfirmationProcess(string xmlMessage, int zicyzUserId)
+		{
+			return DoConfirmationProcess(ProcessType.CrmOrderConfirmationProcess, xmlMessage, zicyzUserId);
+		}
+
+        /// <summary>
+        /// Zpracování odsouhlasení objednávky CRM - CrmOrderApproval (message C2)
+        /// </summary>
+        /// <param name="xmlMessage">Zpráva ve formátu xml</param>
+        /// <param name="zicyzUserId">Id uživatele, zapisuje se do logu spolu s výsledkem operace</param>
+        /// <returns>Vrací instanci třídy <see cref="ProcResult"/> popisující výsledek operace</returns>
+        public ProcResult CrmOrderApprovalProcess(string xmlMessage, int zicyzUserId)
+		{
+			return DoConfirmationProcess(ProcessType.CrmOrderApprovalProcess, xmlMessage, zicyzUserId);
 		}
 		
 
@@ -278,15 +280,15 @@ public ProcResult ReturnedShipmentProcess(string xmlMessage, int zicyzUserId)  	
 		#region Services Statuses
 
 		/// <summary>
-		/// zjištění stavu FenixSoapService, FenixAppService, FenixAutomat a databáze
+		/// Zjištění stavu FenixSoapService, FenixAppService, FenixAutomat a databáze
 		/// </summary>
 		/// <returns>ProcResult (field ReturnMessage by měl obsahovat string 'Automat Rows : 1  |   DateTime : yyyy-mm-dd hh:mi:ss.mmm')</returns>
 		public ProcResult GetServicesStatuses(int zicyzUserId)
 		{
 			ProcResult result = new ProcResult();
-			result.ReturnValue = BC.NOT_OK;
+			result.ReturnValue = Bc.NotOk;
 
-			if (this.verifyToken() == false)
+			if (this.VerifyToken() == false)
 			{
 				return result;
 			}
@@ -302,13 +304,13 @@ public ProcResult ReturnedShipmentProcess(string xmlMessage, int zicyzUserId)  	
 										
 					db.prGetAutomatStatus(retVal, retMsg);
 
-					result.ReturnValue = retVal.Value.ToInt32(BC.NOT_OK);
+					result.ReturnValue = retVal.Value.ToInt32(Bc.NotOk);
 					result.ReturnMessage = retMsg.Value.ToString(String.Empty);
 					SoapHeaderHelper<ActionResult>.SetOutputHeader("ActionResult", new ActionResult() { StatusId = ActionStatus.Success.ToShort(), StatusDesc = "OK" });
 				}
 				catch (Exception ex)
 				{
-					result = BC.CreateErrorResult(FenixHelper.AppLog.GetMethodName(), ex);
+					result = Bc.CreateErrorResult(ApplicationLog.GetMethodName(), ex);
 					SoapHeaderHelper<ActionResult>.SetOutputHeader("ActionResult", new ActionResult() { StatusId = ActionStatus.Failure.ToShort(), StatusDesc = ex.Message });
 				}
 			}
@@ -316,23 +318,23 @@ public ProcResult ReturnedShipmentProcess(string xmlMessage, int zicyzUserId)  	
 			return result;
 		}
 
-		#endregion
+        #endregion
 
-		#region PrivateMethods
+        #region PrivateMethods
 
-		/// <summary>
-		/// vlastní zpracování daného typu procesu (ReceptionConfirmation, KittingConfirmation ...)
-		/// </summary>
-		/// <param name="processType"></param>
-		/// <param name="xmlMessage"></param>
-		/// <param name="zicyzUserId"></param>
-		/// <returns></returns>
-		private ProcResult doConfirmationProcess(ProcessType processType, string xmlMessage, int zicyzUserId)
+        /// <summary>
+        /// Vlastní zpracování daného typu procesu (ReceptionConfirmation, KittingConfirmation ...)
+        /// </summary>
+        /// <param name="processType"></param>
+        /// <param name="xmlMessage">Zpráva ve formátu xml</param>
+        /// <param name="zicyzUserId">Id uživatele, zapisuje se do logu spolu s výsledkem operace</param>
+        /// <returns></returns>
+        private ProcResult DoConfirmationProcess(ProcessType processType, string xmlMessage, int zicyzUserId)
 		{
 			ProcResult result = new ProcResult();
-			result.ReturnValue = BC.NOT_OK;
+			result.ReturnValue = Bc.NotOk;
 
-			if (this.verifyToken() == false)
+			if (this.VerifyToken() == false)
 			{
 				return result;
 			}
@@ -343,7 +345,7 @@ public ProcResult ReturnedShipmentProcess(string xmlMessage, int zicyzUserId)  	
 				{
 					db.Configuration.LazyLoadingEnabled = false;
 					db.Configuration.ProxyCreationEnabled = false;					
-					db.Database.CommandTimeout = BC.EFCommandTimeout;
+					db.Database.CommandTimeout = Bc.DbCommandTimeout;
 
 					var par1Parameter = new SqlParameter();
 					par1Parameter.ParameterName = "@par1";
@@ -368,18 +370,18 @@ public ProcResult ReturnedShipmentProcess(string xmlMessage, int zicyzUserId)  	
 					// diky problémům v EF 6 (rollback ve SP) je nutno SP volat tímto způsobem
 					var res = db.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, this.createSqlCommand(processType), par1Parameter, returnValue, returnMessage);
 
-					result.ReturnValue = returnValue.Value.ToInt32(BC.NOT_OK);
+					result.ReturnValue = returnValue.Value.ToInt32(Bc.NotOk);
 					result.ReturnMessage = returnMessage.Value.ToString(String.Empty);
 					SoapHeaderHelper<ActionResult>.SetOutputHeader("ActionResult", new ActionResult() { StatusId = ActionStatus.Success.ToShort(), StatusDesc = "OK" });
 				}
 				catch (Exception ex)
 				{
-					result = BC.CreateErrorResult(FenixHelper.AppLog.GetMethodName(), ex);
+					result = Bc.CreateErrorResult(ApplicationLog.GetMethodName(), ex);
 					SoapHeaderHelper<ActionResult>.SetOutputHeader("ActionResult", new ActionResult() { StatusId = ActionStatus.Failure.ToShort(), StatusDesc = ex.Message });
 				}
 			}
 
-			logResult(result, FenixHelper.AppLog.GetMethodName(), zicyzUserId);
+			logResult(result, ApplicationLog.GetMethodName(), zicyzUserId);
 			return result;
 		}
 
@@ -439,7 +441,7 @@ public ProcResult ReturnedShipmentProcess(string xmlMessage, int zicyzUserId)  	
 		{
 			try
 			{
-				string logType = result.ReturnValue == BC.OK ? "INFO" : "ERROR";
+				string logType = result.ReturnValue == Bc.Ok ? "INFO" : "ERROR";
 				string message = String.Format("MethodName [{0}] result.ReturnValue [{1}] result.ReturnMessage [{2}]", source, result.ReturnValue, result.ReturnMessage);
 								
 				using (var db = new FenixEntities())
@@ -462,9 +464,9 @@ public ProcResult ReturnedShipmentProcess(string xmlMessage, int zicyzUserId)  	
 		/// Ověření tokenu
 		/// </summary>
 		/// <returns></returns>
-		private bool verifyToken()
+		private bool VerifyToken()
 		{
-			this.appId = String.Empty;
+			this._appId = String.Empty;
 
 			// Získání tokenu z hlavičky
 			AuthToken authToken = SoapHeaderHelper<AuthToken>.GetInputHeader("AuthToken");
@@ -477,9 +479,9 @@ public ProcResult ReturnedShipmentProcess(string xmlMessage, int zicyzUserId)  	
 			}
 
 			// Ověření platnosti tokenu
-			Token tkn = new Token(BC.SecretKey, "AuthToken", token);
+			Token tkn = new Token(Bc.SecretKey, "AuthToken", token);
 			TokenStatus stat = tkn.Verify();
-			this.appId = tkn.Id;
+			this._appId = tkn.Id;
 
 			if (stat != TokenStatus.Valid)
 			{
